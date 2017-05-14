@@ -410,16 +410,21 @@ mkdir btyper_tutorial_2
 * In the upper-right corner, click "Send"->"Complete Record"->"File"->"FASTA". The sequence should begin downloading as a file named "sequence.fasta".
 
 * Move your sequence to the btyper_tutorial_2 directory and rename it to ames_ancestor.fasta by typing the following command and pressing **Enter:**
-                                                                                                                                ```
-                                                                                                                              mv sequence.fasta btyper_tutorial_2/ames_ancestor.fasta
-                                                                                                                              ```
-                                                                                                                              
 
+```
+
+mv sequence.fasta btyper_tutorial_2/ames_ancestor.fasta
+
+```
+                                                                                                              
 * Repeat steps (i) through (iii), replacing the URL and new file name (ames_ancestor.fasta) with the following:
                                                                                                                                 https://www.ncbi.nlm.nih.gov/nuccore/NC_004722.1 (rename to atcc_14579.fasta), 
                                                                                                                               https://www.ncbi.nlm.nih.gov/nuccore/NC_005957.1 (rename to konkukian.fasta)
                                                                                                                               
+                                                                                                                              
 5. Move to your btyper_tutorial_2 by typing the following command and pressing **Enter:**   
+
+
 ```
                                                                                                                              cd ~/Downloads/btyper_tutorial_2
                                                                                                                              ```
