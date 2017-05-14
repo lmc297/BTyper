@@ -357,23 +357,23 @@ We're working with a single genome formed by multiple contigs in a single file. 
 
 8. Now that we've opened the final results file for our isolate, we can see information about our isolate, divided into several parts:
   
-  + **Predicted Virulence Proteins**
+  * **Predicted Virulence Proteins**
   
   This is a list of proteins detected in our genome at 70\% coverage and 50\% identity using an amino acid sequence database (BTyper's default settings for virulence typing). Looking through the list of virulence genes, it seems that our isolate possesses a couple of *B. anthracis*-associated genes with really high similarity, including anthrax toxin genes *cya, lef,* and *pagA*!
                                                                                                                               
-                                                                                                                              + **Predicted *panC* Clade Designation**
+                                                                                                                              * **Predicted *panC* Clade Designation**
                                                                                                                               
                                                                                                                               This corresponds to our isolate's *panC* clade assignment. It looks like the closest-matching *panC* sequence was that of *B. cereus* 03BB87, which belongs to *panC* Clade III, the same clade as *B. anthracis*.
                                                                                                                               
-                                                                                                                              + **Predicted MLST Profile**
+                                                                                                                              * **Predicted MLST Profile**
                                                                                                                                 
                                                                                                                                 This section contains our isolate's allelic types for 7-gene MLST, as well as the associated sequence type. It looks like our *B. cereus* isolate belongs to ST 78, matching with 100\% identity.
                                                                                                                               
-                                                                                                                              + **Predicted *rpoB* Allelic Type**
+                                                                                                                              * **Predicted *rpoB* Allelic Type**
                                                                                                                               
                                                                                                                               This section contains the closest-matching *rpoB* allelic type for our isolate. Our isolate's *rpoB* allele appears to match allelic type 365 exactly, which matched *B. cereus* most closely when the NCBI BLAST server was used.
                                                                                                                               
-                                                                                                                              + **Predicted 16S Type**
+                                                                                                                              * **Predicted 16S Type**
                                                                                                                                 
                                                                                                                                 This section contains the closest-matching 16S gene of *B. cereus* group type strains. While out isolate looks like it matches *B. cereus* ATCC 14579 most closely, we should interpret all 16S typing results with caution. 
                                                                                                                               
@@ -403,17 +403,17 @@ We're working with a single genome formed by multiple contigs in a single file. 
                                                                                                                               
                                                                                                                               4. Let's download 3 *B. cereus* group chromosomes from NCBI, starting with *B. anthracis* Ames Ancestor:
                                                                                                                                 
-                                                                                                                                + Click on the following link to go to the genome page: https://www.ncbi.nlm.nih.gov/nuccore/NC_007530.2 
+                                                                                                                                * Click on the following link to go to the genome page: https://www.ncbi.nlm.nih.gov/nuccore/NC_007530.2 
                                                                                                                               
-                                                                                                                              + In the upper-right corner, click "Send"->"Complete Record"->"File"->"FASTA". The sequence should begin downloading as a file named "sequence.fasta".
+                                                                                                                              * In the upper-right corner, click "Send"->"Complete Record"->"File"->"FASTA". The sequence should begin downloading as a file named "sequence.fasta".
                                                                                                                               
-                                                                                                                              + Move your sequence to the btyper_tutorial_2 directory and rename it to ames_ancestor.fasta by typing the following command and pressing **Enter:**
+                                                                                                                              * Move your sequence to the btyper_tutorial_2 directory and rename it to ames_ancestor.fasta by typing the following command and pressing **Enter:**
                                                                                                                                 
                                                                                                                                 ```
                                                                                                                               mv sequence.fasta btyper_tutorial_2/ames_ancestor.fasta
                                                                                                                               ```
                                                                                                                               
-                                                                                                                              + Repeat steps (i) through (iii), replacing the URL and new file name (ames_ancestor.fasta) with the following:
+                                                                                                                              * Repeat steps (i) through (iii), replacing the URL and new file name (ames_ancestor.fasta) with the following:
                                                                                                                                 https://www.ncbi.nlm.nih.gov/nuccore/NC_004722.1 (rename to atcc_14579.fasta), 
                                                                                                                               https://www.ncbi.nlm.nih.gov/nuccore/NC_005957.1 (rename to konkukian.fasta)
                                                                                                                               
@@ -514,11 +514,11 @@ We're working with a single genome formed by multiple contigs in a single file. 
                                                                                                                               
                                                                                                                               5. Once our command is finished running, we can head to our output directory (btyper_tutorial_3). In addition to the usual btyper_final_results directory that BTyper produces, we should also see some additional files:
                                                                                                                               
-                                                                                                                              + **ERR1775894_1.fastq.gz**, our forward reads from SRA
+                                                                                                                              * **ERR1775894_1.fastq.gz**, our forward reads from SRA
                                                                                                                               
-                                                                                                                              + **ERR1775894_2.fastq.gz**, our reverse reads from SRA; if we were to input an SRA accession number associated with ILLUMINA single-end reads, we would only have 1 fastq.gz file of reads
+                                                                                                                              * **ERR1775894_2.fastq.gz**, our reverse reads from SRA; if we were to input an SRA accession number associated with ILLUMINA single-end reads, we would only have 1 fastq.gz file of reads
                                                                                                                               
-                                                                                                                              + **ERR1775894_1_spades_assembly.fasta**, our file of contigs produced using SPAdes. If more than one k-mer size is tested (like we did here), BTyper chooses the optimal one, as determined by SPAdes. In this case, a k-mer size of 77 (BTyper's default option for -\-spades_k) produced the best assembly, so BTyper selected this assembly for its analysis.
+                                                                                                                              * **ERR1775894_1_spades_assembly.fasta**, our file of contigs produced using SPAdes. If more than one k-mer size is tested (like we did here), BTyper chooses the optimal one, as determined by SPAdes. In this case, a k-mer size of 77 (BTyper's default option for -\-spades_k) produced the best assembly, so BTyper selected this assembly for its analysis.
 
 + **ERR1775894_1_pseudochrom.fasta**, our pseudochromosome, formed by concatenating the contigs of our optimal assembly (in this case, ERR1775894_1_spades_assembly.fasta) using BTyper's -\-draft_genome option.
 
