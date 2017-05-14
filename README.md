@@ -245,14 +245,14 @@ Note: We recommend selecting optimum k-mer size(s) for your specific data set by
   *file*
   Final results text file, 1 per input genome. BTyper creates this final results text file, which contains the following, depending on which typing methods you have selected to perform:
   
-  * **If virulence typing is being performed (-\-virulence True):**
-  A tab-separated list of virulence genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
+* **If virulence typing is being performed (-\-virulence True):**
+A tab-separated list of virulence genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
 
 * **If *panC* clade typing is being performed (-\-panC True):**
-  A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at \geq 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at \geq 75\% identity but \leq 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
+A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at \geq 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at \geq 75\% identity but \leq 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
 
 * **If MLST is being performed (-\-mlst True):**
-  A tab-separated line, containing the isolate's (i) sequence type (ST), (ii) *glp* allelic type (AT), (iii) *gmk* AT, (iv) *ilv* AT, (v) *pta* AT, (vi) *pur* AT, (vii) *pyc* AT, and (viii) *tpi* AT. The best-matching allele is reported at each locus; an allele that does not match with 100\% identity or coverage is denoted by an asterisk (\*), while an allele that is not detected in the genome at the given e-value threshold is denoted by "?". If a sequence type cannot be determined using the 7 best-matching allelic types, a "?" is listed in its place. A ST that is detemined using any best-matching alleles that did not match with 100\% identity or coverage is denoted by \*, regardless of whether all 7 alleles could be associated with a ST or not.
+A tab-separated line, containing the isolate's (i) sequence type (ST), (ii) *glp* allelic type (AT), (iii) *gmk* AT, (iv) *ilv* AT, (v) *pta* AT, (vi) *pur* AT, (vii) *pyc* AT, and (viii) *tpi* AT. The best-matching allele is reported at each locus; an allele that does not match with 100\% identity or coverage is denoted by an asterisk (\*), while an allele that is not detected in the genome at the given e-value threshold is denoted by "?". If a sequence type cannot be determined using the 7 best-matching allelic types, a "?" is listed in its place. A ST that is detemined using any best-matching alleles that did not match with 100\% identity or coverage is denoted by \*, regardless of whether all 7 alleles could be associated with a ST or not.
 
 * **If *rpoB* allelic typing is being performed (-\-rpoB True):**
 A tab-separated line, containing information about the best-matching *rpoB* allele, percent identity, and percent coverage. The *rpoB* allelic information is presented in the following format:
@@ -266,7 +266,7 @@ Currently, "Genus" refers to the genus of the best-matching organism using NCBI'
 and "species" refers to the species of the best-matching organism using NCBI's BLAST server (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 
 * **If 16S rDNA typing is being performed (-\-s True):**
-  A tab-separated line containing strain information of the best-matching of 9 *B. cereus* group type strains, percent identity, and percent coverage. Interpret this information at your own risk, as 16S rDNA sequencing is NOT recommended for typing *B. cereus* group isolates.
+A tab-separated line containing strain information of the best-matching of 9 *B. cereus* group type strains, percent identity, and percent coverage. Interpret this information at your own risk, as 16S rDNA sequencing is NOT recommended for typing *B. cereus* group isolates.
 
 **genefiles**
   *directory*
@@ -290,13 +290,13 @@ and "species" refers to the species of the best-matching organism using NCBI's B
   
   ## Frequently Asked Questions
   
-  * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
+ * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
   
-  Sure! You don't have to use whole-genome sequences as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
+Sure! You don't have to use whole-genome sequences as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
 
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
-  Technically yes! You can use whole-genome sequencing data from any bacterial species as input; in fact, BTyper's *rpoB* allelic type database provided by Cornell's Food Safety Lab actually contains allelic types for non-*Bacillus* species. However, your results from certain typing analyses (i.e. MLST using the *B. cereus* group typing scheme) may be completely meaningless. Be extra cautious when interpreting them, and always take identity and coverage values for detected genes into consideration.
+Technically yes! You can use whole-genome sequencing data from any bacterial species as input; in fact, BTyper's *rpoB* allelic type database provided by Cornell's Food Safety Lab actually contains allelic types for non-*Bacillus* species. However, your results from certain typing analyses (i.e. MLST using the *B. cereus* group typing scheme) may be completely meaningless. Be extra cautious when interpreting them, and always take identity and coverage values for detected genes into consideration.
 
 
 ------------------------------------------------------------------------
@@ -304,9 +304,9 @@ and "species" refers to the species of the best-matching organism using NCBI's B
   
   ## BTyper Tutorial #1: Characterizing a *B. cereus* isolate using its draft genome
   
-  1. First, let's download our isolate's draft genome from NCBI by clicking the follwoing link:
+1. First, let's download our isolate's draft genome from NCBI by clicking the follwoing link:
   
-  https://www.ncbi.nlm.nih.gov/Traces/wgs/JHQN01
+https://www.ncbi.nlm.nih.gov/Traces/wgs/JHQN01
 
 If not already selected, click the "Download" tab. Click on the link for the FASTA file to download the contigs in fasta format: JHQN01.1.fsa_nt.gz. This should download the file into your "Downloads" directory.
 
@@ -342,13 +342,13 @@ Here are the options we selected, explained:
 Because our sequence is in fasta format, we're declaring our input type to be seq
 
 * **-i ~/Downloads/JHQN01.1.fsa_nt**
-  We're directing BTyper to our input file (JHQN01.1.fsa_nt)
+We're directing BTyper to our input file (JHQN01.1.fsa_nt)
 
 * **-o ~/Downloads/btyper_tutorial_1**
 We're telling BTyper where to store the output files it produces (our directory, btyper_tutorial_1)
 
 * **-s True**
-  Because 16S typing is not performed by default, we're setting this option to True
+Because 16S typing is not performed by default, we're setting this option to True
 
 * **-\-draft_genome**
 We're working with a single genome formed by multiple contigs in a single file. We're going to tell BTyper to concatenate these contigs into a pseudochromosome, rather than treat each as a separate genome.
@@ -361,7 +361,7 @@ We're working with a single genome formed by multiple contigs in a single file. 
   
 This is a list of proteins detected in our genome at 70\% coverage and 50\% identity using an amino acid sequence database (BTyper's default settings for virulence typing). Looking through the list of virulence genes, it seems that our isolate possesses a couple of *B. anthracis*-associated genes with really high similarity, including anthrax toxin genes *cya, lef,* and *pagA*!
 
-* ** Predicted *panC* Clade Designation**
+* **Predicted *panC* Clade Designation**
 This corresponds to our isolate's *panC* clade assignment. It looks like the closest-matching *panC* sequence was that of *B. cereus* 03BB87, which belongs to *panC* Clade III, the same clade as *B. anthracis*.
 
 * **Predicted MLST Profile**
@@ -422,12 +422,12 @@ mv sequence.fasta btyper_tutorial_2/ames_ancestor.fasta
                                                                                                                               https://www.ncbi.nlm.nih.gov/nuccore/NC_005957.1 (rename to konkukian.fasta)
                                                                                                                               
                                                                                                                               
-5. Move to your btyper_tutorial_2 by typing the following command and pressing **Enter:**   
-
+5. Move to your btyper_tutorial_2 by typing the following command and pressing **Enter:**
 
 ```
-                                                                                                                             cd ~/Downloads/btyper_tutorial_2
-                                                                                                                             ```
+cd ~/Downloads/btyper_tutorial_2
+```
+
                                                                                                                              
 6. Next, let's concatenate all 3 chromosomes together to form a multifasta called "bacillus.fasta" by typing the following command and pressing **Enter:** 
 
