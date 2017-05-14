@@ -1,16 +1,6 @@
----
-title: "BTyper: a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data"
-author: "Laura Carroll"
-date: "May 2, 2017"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 2
----
+# BTyper: a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data
 
-
-------------------------------------------------------------------------
-
+### Author: Laura Carroll
 
 # Overview
 
