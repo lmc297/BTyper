@@ -475,9 +475,9 @@ We're lowering the percent coverage threshold for virulence gene detection using
 8. We can find our virulence gene nucleotide sequences deposited in the genefiles folder in our btyper_final_results directory. Our *plcR* nucleotide sequences will be labeled as plcR_genefile.fasta. We can then align the sequences in this file, build a phylogenetic tree, call SNPs, etc.
 
 9. If you want to delete the results from this tutorial, just go to your Downloads folder and delete the "btyper_tutorial_2" directory there.
-                                                                                                                              
-                                                                                                                               ------------------------------------------------------------------------
-                                                                                                                               
+
+------------------------------------------------------------------------
+
 ## BTyper Tutorial #3: Assembling and characterizing the genome of a clinical *B. cereus* isolate using its SRA accession number
 
 1. First, open up your terminal, as described in Tutorial #1
