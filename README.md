@@ -1,8 +1,7 @@
-# BTyper: a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data
+# BTyper
+## A computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data
 
-### Author: Laura Carroll
-
-# Overview
+## Overview
 
 BTyper is a command-line tool that employs a combination of (i) virulence gene-based typing, (ii) multi-locus sequence typing (MLST), (iii) panC clade typing, and (iv) rpoB allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data.
 
@@ -11,7 +10,7 @@ The program, as well as the associated databases, can be downloaded from https:/
 Post issues at https://github.com/lmc297/BTyper/issues
 
 
-## Citation
+### Citation
 
 If you found the BTyper tool, its source code, and/or any of its associated databases useful, please cite:
 
@@ -21,9 +20,9 @@ Carroll, Laura M., Jasna Kovac, Rachel A. Miller, Martin Wiedmann. 2017. Rapid, 
 ------------------------------------------------------------------------
 
 
-# Quick Start
+## Quick Start
 
-### Command structure:
+#### Command structure:
 
 ```
 btyper -t [input data type] -i [input file(s)] -o [output directory] [options...]
@@ -33,7 +32,7 @@ For help, type `btyper -h` or `btyper --help`
 
 For your current version, type `btyper --version`
 
-### Sample commands and analyses:
+#### Sample commands and analyses:
 
 **Using a fasta/multifasta containing 1 or more closed genomes:**
 
@@ -74,8 +73,8 @@ btyper -t sra-get -i SRAXXXXXXX -o /path/to/output_directory
 ------------------------------------------------------------------------
 
 
-# Installation
-## Install BTyper using Homebrew (macOS users)
+## Installation
+### Install BTyper using Homebrew (macOS users)
 
 BTyper and its dependencies can be installed using <a href="https://brew.sh/">Homebrew</a>.
 
@@ -103,7 +102,7 @@ brew tap lmc297/homebrew-btyper
 brew install btyper
 ```
 
-## Download and run BTyper using source file (macOS and Ubuntu)
+### Download and run BTyper using source file (macOS and Ubuntu)
 
 1. To run BTyper, please download and install the following dependencies, if necessary:
 
@@ -141,8 +140,8 @@ Note: In the examples below, BTyper commands are shown as ```btyper [options...]
 ------------------------------------------------------------------------
 
 
-# Usage and Options
-## Input File Formats
+## Usage and Options
+### Input File Formats
 
 The command line version of BTyper supports the following file formats as input:
 
@@ -158,7 +157,7 @@ The command line version of BTyper supports the following file formats as input:
 
 6. **Sequence Read Archive (SRA) accession numbers corresponding to genomes sequenced with paired-end or single-end ILLUMINA reads** (one SRA accession number per genome)
 
-## Required Arguments
+### Required Arguments
 
 BTyper can be run from your terminal with the following command line:
 
@@ -178,7 +177,7 @@ Path to input fasta file, fastq.gz file(s), sra file, or SRA accession number. F
 **-o/-\phantom{}-output [string]**
 Path to desired output directory. Specify the path to the output directory where a results directory (btyper_final_results) containing output files will be created.
 
-## Optional Arguments
+### Optional Arguments
 
 Options that can be specified in BTyper include the following:
 
@@ -234,7 +233,7 @@ Note: We recommend selecting optimum k-mer size(s) for your specific data set by
 ------------------------------------------------------------------------
 
 
-# Output Directories and Files
+## Output Directories and Files
 
 A single BTyper run will deposit the following in your specified output directory (-\phantom{}-output):
 
@@ -289,7 +288,7 @@ Directory in which BTyper deposits additional results files for each input genom
 ------------------------------------------------------------------------
 
 
-# Frequently Asked Questions
+## Frequently Asked Questions
 
 * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
 
@@ -303,7 +302,7 @@ Technically yes! You can use whole-genome sequencing data from any bacterial spe
 ------------------------------------------------------------------------
 
 
-# BTyper Tutorial #1: Characterizing a *B. cereus* isolate using its draft genome
+## BTyper Tutorial #1: Characterizing a *B. cereus* isolate using its draft genome
 
 1. First, let's download our isolate's draft genome from NCBI by clicking the follwoing link:
 
@@ -386,7 +385,7 @@ Sure enough, this genome is actually that of *B. cereus* strain BcFL2013, which 
 ------------------------------------------------------------------------
 
 
-# BTyper Tutorial #2: Extracting *plcR* nucleotide sequences from 3 *B. cereus* group assemblies using their closed chromosomes
+## BTyper Tutorial #2: Extracting *plcR* nucleotide sequences from 3 *B. cereus* group assemblies using their closed chromosomes
 
 1. Open your terminal, as described in Tutorial #1 
 
@@ -473,7 +472,7 @@ We're lowering the percent coverage threshold for virulence gene detection using
 ------------------------------------------------------------------------
 
 
-# BTyper Tutorial #3: Assembling and characterizing the genome of a clinical *B. cereus* isolate using its SRA accession number
+## BTyper Tutorial #3: Assembling and characterizing the genome of a clinical *B. cereus* isolate using its SRA accession number
 
 1. First, open up your terminal, as described in Tutorial #1
 
@@ -533,9 +532,9 @@ This is the number of threads we want SPAdes to use. Here, we're using 8 threads
 ------------------------------------------------------------------------
 
 
-# References
+## References
 
-### Dependencies
+#### Dependencies
 
 Bankevich, Anton, et al. SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing. *Journal of Computational Biology* 2012 May; 19(5): 455-477.
 
@@ -545,7 +544,7 @@ Cock, Peter J., et al. Biopython: freely available Python tools for computationa
 
 Leinonen, Rasko, et al. The Sequence Read Archive. *Nucleic Acids Research* 2011 Jan; 39(Database issue): D19–D21.
 
-### Typing Methods
+#### Typing Methods
 
 Guinebretière, MH, et al. Ecological diversification in the *Bacillus cereus* Group. *Environmental Microbiology* 2008 April; 10(4): 851-65.
 
@@ -559,7 +558,7 @@ PubMLST *Bacillus cereus* MLST database (https://pubmlst.org/bcereus/), based on
 
 Rossi-Tamisier, M., et al. Cautionary tale of using 16S rRNA gene sequence similarity values in identification of human-associated bacterial species. *International Journal of Systematic and Evolutionary Microbiology* (2015), 65, 1929–1934.
 
-### Tutorial Genomes
+#### Tutorial Genomes
 
 Gee, JE, et al. Draft Genome Sequence of *Bacillus cereus* Strain BcFL2013, a Clinical Isolate Similar to G9241. *Genome Announcements* 2014 May 29;2(3).
 
