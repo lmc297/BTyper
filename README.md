@@ -134,7 +134,7 @@ Note: to ensure that BTyper works correctly, make sure database directories (beg
 python /path/to/executable/btyper [options...]
 ```
 
-Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python to execute the program: ```python btyper [options...]```.
+Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program: ```python btyper [options...]```.
 
 
 ------------------------------------------------------------------------
