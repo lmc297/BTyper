@@ -14,7 +14,7 @@ Post issues at https://github.com/lmc297/BTyper/issues
 
 If you found the BTyper tool, its source code, and/or any of its associated databases useful, please cite:
   
-  Carroll, Laura M., Jasna Kovac, Rachel A. Miller, Martin Wiedmann. 2017. Rapid, high-throughput identification of anthrax-causing and emetic *Bacillus cereus* group genome assemblies using BTyper, a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data. Submitted to *Applied and Environmental Microbiology*.
+Carroll, Laura M., Jasna Kovac, Rachel A. Miller, Martin Wiedmann. 2017. Rapid, high-throughput identification of anthrax-causing and emetic *Bacillus cereus* group genome assemblies using BTyper, a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data. Submitted to *Applied and Environmental Microbiology*.
 
 
 ------------------------------------------------------------------------
@@ -168,82 +168,82 @@ btyper -t [input data type] -i [input file(s)] -o [output directory] [options...
 Required arguments are:
   
   
-  **-t/-\-type [seq, pe, se, sra, sra-get]**
-  Input data type. Specify the format of the input data using one of the following strings: seq (a file in fasta or multifasta format), pe (ILLUMINA paired-end reads, forward and reverse, in two separate fastq.gz files), se (ILLUMINA single-end reads in one fastq.gz file), sra (Single- or paried-end ILLUMINA reads in one SRA file), sra-get (SRA accession number associated with a genome sequenced using single- or paried-end ILLUMINA reads)
+**-t/-\-type [seq, pe, se, sra, sra-get]**
+Input data type. Specify the format of the input data using one of the following strings: seq (a file in fasta or multifasta format), pe (ILLUMINA paired-end reads, forward and reverse, in two separate fastq.gz files), se (ILLUMINA single-end reads in one fastq.gz file), sra (Single- or paried-end ILLUMINA reads in one SRA file), sra-get (SRA accession number associated with a genome sequenced using single- or paried-end ILLUMINA reads)
 
 **-i/-\-input [string]**
-  Path to input fasta file, fastq.gz file(s), sra file, or SRA accession number. For paired-end ILLUMINA reads in separate files, the path to the fastq.gz file containing forward reads should be specified first, followed by the path to the fastq.gz file containing reverse reads, with the two paths separated by a single space.
+Path to input fasta file, fastq.gz file(s), sra file, or SRA accession number. For paired-end ILLUMINA reads in separate files, the path to the fastq.gz file containing forward reads should be specified first, followed by the path to the fastq.gz file containing reverse reads, with the two paths separated by a single space.
 
 **-o/-\-output [string]**
-  Path to desired output directory. Specify the path to the output directory where a results directory (btyper_final_results) containing output files will be created.
+Path to desired output directory. Specify the path to the output directory where a results directory (btyper_final_results) containing output files will be created.
 
 ### Optional Arguments
 
 Options that can be specified in BTyper include the following:
   
-  **-\-draft_genome**
-  For use with a draft genome (contigs or scaffolds) in fasta format (-\-input my_contigs.fasta -\-type seq). If -\-draft_genome is included in the command, BTyper creates a pseudochromosome by concatenating contigs or scaffolds in a fasta file and inserting a spacer sequence ("NNnnNNnnNNnnNNnn") between them. This option is ommitted by default.
+**-\-draft_genome**
+For use with a draft genome (contigs or scaffolds) in fasta format (-\-input my_contigs.fasta -\-type seq). If -\-draft_genome is included in the command, BTyper creates a pseudochromosome by concatenating contigs or scaffolds in a fasta file and inserting a spacer sequence ("NNnnNNnnNNnnNNnn") between them. This option is ommitted by default.
 
 **-v/-\-virulence [True or False]**
-  Virulence gene typing. Performs typing based on presence of virulence genes using a database of genes specific to *Bacillus cereus* group species. Reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True.
+Virulence gene typing. Performs typing based on presence of virulence genes using a database of genes specific to *Bacillus cereus* group species. Reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True.
 
 **-v_db/-\-virulence_database [aa or nuc]**
-  Virulence gene database to use for virulence gene detection. Optional argument for use with virulence typing (-\-virulence True). Specify -\-virulence_database nuc to use a nucleotide sequence database and nucleotide blast (blastn), or -\-virulence_database aa to use an amino acid sequence database and translated nucleotide blast (tblastn). Default is set to aa (amino acid sequence database).
+Virulence gene database to use for virulence gene detection. Optional argument for use with virulence typing (-\-virulence True). Specify -\-virulence_database nuc to use a nucleotide sequence database and nucleotide blast (blastn), or -\-virulence_database aa to use an amino acid sequence database and translated nucleotide blast (tblastn). Default is set to aa (amino acid sequence database).
 Note: tblastn compares a protein query sequence against a nucleotide sequence database dynamically translated in all six reading frames. As a result, -\-virulence_database aa will take longer than -\-virulence_database nuc (virulence gene detection for 70 *B. cereus* group closed assemblies with -\-virulence_database aa and default thresholds takes ~3.5 minutes, while -\-virulence_database nuc and default thresholds takes ~1 minute).
 
 **-aa_p/-\-amino_acid_p [integer between 0 and 100]**
-  Minimum percent identity for amino acid database. Optional argument for use with virulence typing using an amino acid database (-\-virulence True -\-virulence_database aa). Specify the minimum percent amino acid identity needed for a virulence gene to be considered present in a sequence. Default is set to 50.
+Minimum percent identity for amino acid database. Optional argument for use with virulence typing using an amino acid database (-\-virulence True -\-virulence_database aa). Specify the minimum percent amino acid identity needed for a virulence gene to be considered present in a sequence. Default is set to 50.
 
 **-aa_q/-\-amino_acid_q [integer between 0 and 100]**
-  Minimum query coverage for amino acid database. Optional argument for use with virulence typing using an amino acid database (-\-virulence True -\-virulence_database aa). Specify the minimum percent coverage needed for a virulence gene to be considered present in a sequence when using an amino acid database. Default is set to 70.
+Minimum query coverage for amino acid database. Optional argument for use with virulence typing using an amino acid database (-\-virulence True -\-virulence_database aa). Specify the minimum percent coverage needed for a virulence gene to be considered present in a sequence when using an amino acid database. Default is set to 70.
 
 **-nuc_p/-\-nucleotide_p [integer between 0 and 100]**
-  Minimum percent identity for nucleotide database. Optional argument for use with virulence typing using a nucleotide database (-\-virulence True -\-virulence_database nuc). Specify the minimum percent nucleotide identity needed for a virulence gene to be considered present in a sequence. Default is set to 75.
+Minimum percent identity for nucleotide database. Optional argument for use with virulence typing using a nucleotide database (-\-virulence True -\-virulence_database nuc). Specify the minimum percent nucleotide identity needed for a virulence gene to be considered present in a sequence. Default is set to 75.
 
 **-nuc_q/-\-nucleotide_q [integer between 0 and 100]**
-  Minimum query coverage for nucleotide database. Optional argument for use with virulence typing using a nucleotide database (-\-virulence True -\-virulence_database nuc). Specify the minimum percent coverage needed for a virulence gene to be considered present in a sequence when using a nucleotide database. Default is set to 90.
+Minimum query coverage for nucleotide database. Optional argument for use with virulence typing using a nucleotide database (-\-virulence True -\-virulence_database nuc). Specify the minimum percent coverage needed for a virulence gene to be considered present in a sequence when using a nucleotide database. Default is set to 90.
 
 **-m/-\-mlst [True or False]**
-  Multilocus sequence typing (MLST). Performs MLST using nucleotide blast (blastn) and the *Bacillus cereus* MLST scheme from PubMLST. Reports highest-scoring alleles using BLAST bit score and their associated sequence type, if available. Default is set to True.
+Multilocus sequence typing (MLST). Performs MLST using nucleotide blast (blastn) and the *Bacillus cereus* MLST scheme from PubMLST. Reports highest-scoring alleles using BLAST bit score and their associated sequence type, if available. Default is set to True.
 
 **-r/-\-rpoB [True or False]**
-  *rpoB* allelic typing. Performs *rpoB* allelic typing using nucleotide blast (blastn) and the *rpoB* allelic typing scheme from Cornell's Food Safety Lab. Reports highest-scoring allele using BLAST bit score. Default is set to True.
+*rpoB* allelic typing. Performs *rpoB* allelic typing using nucleotide blast (blastn) and the *rpoB* allelic typing scheme from Cornell's Food Safety Lab. Reports highest-scoring allele using BLAST bit score. Default is set to True.
 
 **-p/-\-panC [True or False]**
 *panC* clade typing. Performs *panC* clade typing using nucleotide blast (blastn) and BTyper's *panC* sequence database. Reports highest-scoring *panC* clade using BLAST bit score. Default is set to True.
 
 **-s [True or False]**
-  16S rDNA typing. Performs 16S rDNA typing using nucleotide blast (blastn) and 16S genes from nine *B. cereus* group type strains. This method is NOT recommended for typing *B. cereus* group species, as 16S sequences cannot differentiate members of this group at the species level. However, it is included as an option, as some users may be interested in this locus. Reports highest-scoring 16S rDNA gene using BLAST bit score. Default is set to False.
+16S rDNA typing. Performs 16S rDNA typing using nucleotide blast (blastn) and 16S genes from nine *B. cereus* group type strains. This method is NOT recommended for typing *B. cereus* group species, as 16S sequences cannot differentiate members of this group at the species level. However, it is included as an option, as some users may be interested in this locus. Reports highest-scoring 16S rDNA gene using BLAST bit score. Default is set to False.
 
 **-e/-\-evalue [float greater than or equal to 0]**
-  Maximum blast e-value. Optional argument for use with any typing scheme(s). Specify the maximum e-value needed for a BTyper run. Default is set to 1e-5.
+Maximum blast e-value. Optional argument for use with any typing scheme(s). Specify the maximum e-value needed for a BTyper run. Default is set to 1e-5.
 Note: this threshold is applied to an entire BTyper run specified by a single command; for example, if you are performing both virulence typing and MLST (-\-virulence True -\-mlst True), and you specify an e-value threshold of 1 (-\-evalue 1), BTyper will apply this maximum threshold to both virulence genes and MLST alleles.
 
 **-\-spades_m [integer]**
-  Memory limit for SPAdes in Gb. Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -m/-\-memory option in SPAdes. Default is set to 250, the default for SPAdes.
+Memory limit for SPAdes in Gb. Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -m/-\-memory option in SPAdes. Default is set to 250, the default for SPAdes.
 
 **-\-spades_t [integer]**
-  Number of threads for SPAdes. Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -t/-\-threads option in SPAdes. Default is set to 16, the default for SPAdes.
+Number of threads for SPAdes. Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -t/-\-threads option in SPAdes. Default is set to 16, the default for SPAdes.
 
 **-\-spades_k [integer,integer,integer,...]**
-  Comma-separated list of k-mer sizes to be used for SPAdes (all values must be odd, less than 128 and listed in ascending order). Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -k option in SPAdes. Default is set to 77.
+Comma-separated list of k-mer sizes to be used for SPAdes (all values must be odd, less than 128 and listed in ascending order). Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -k option in SPAdes. Default is set to 77.
 Note: We recommend selecting optimum k-mer size(s) for your specific data set by consulting the SPAdes documentation. Currently, SPAdes recommends using -k 21,33,55,77 for 150 bp ILLUMINA paired-end reads, and -k 21,33,55,77,99,127 for 250 bp ILLUMINA paired-end reads. 
 
 
 ------------------------------------------------------------------------
   
   
-  ## Output Directories and Files
+## Output Directories and Files
   
-  A single BTyper run will deposit the following in your specified output directory (-\-output):
+A single BTyper run will deposit the following in your specified output directory (-\-output):
   
-  **btyper_final_results**
-  *directory*
-  Final results directory in which BTyper deposits all of its output files. BTyper creates this directory in your specified output directory (-\-output) 
+**btyper_final_results**
+*directory*
+Final results directory in which BTyper deposits all of its output files. BTyper creates this directory in your specified output directory (-\-output) 
 
 ***your_genome_final_results.txt***
-  *file*
-  Final results text file, 1 per input genome. BTyper creates this final results text file, which contains the following, depending on which typing methods you have selected to perform:
+*file*
+Final results text file, 1 per input genome. BTyper creates this final results text file, which contains the following, depending on which typing methods you have selected to perform:
   
 * **If virulence typing is being performed (-\-virulence True):**
 A tab-separated list of virulence genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
@@ -269,28 +269,28 @@ and "species" refers to the species of the best-matching organism using NCBI's B
 A tab-separated line containing strain information of the best-matching of 9 *B. cereus* group type strains, percent identity, and percent coverage. Interpret this information at your own risk, as 16S rDNA sequencing is NOT recommended for typing *B. cereus* group isolates.
 
 **genefiles**
-  *directory*
-  Directory in which BTyper deposits genefiles, (multi)fasta files which contain the sequences of all genes detected in a run. BTyper creates this directory within the btyper_final_results directory within your specified output directory (output_directory/btyper_final_results/genefiles).
+*directory*
+Directory in which BTyper deposits genefiles, (multi)fasta files which contain the sequences of all genes detected in a run. BTyper creates this directory within the btyper_final_results directory within your specified output directory (output_directory/btyper_final_results/genefiles).
 
 ***some_gene_genefile.fasta***
-  *file*
-  BTyper genefiles, (multi)fasta files which contain the sequences of all genes detected in a run. For virulence gene typing, a file will be created for each virulence gene detected in a genome that meet your specified thresholds. The sequence of the best-matching gene/allele using its BLAST bit score is printed to the genefile. If -\-virulence_database aa is selected (the default for BTyper), the amino acid sequence is printed. If -\-virulence_database nuc, is selected, the nucleotide sequence is reported. For MLST, 7 files are created (one for each of the 7 alleles). *rpoB*, *panC*, and 16S typing each produce one genefile. If BTyper is run using more than 1 genome as input (either in multifasta format, or if BTyper is run in a loop), genes from each genome are aggregated together in each genefile. These files are formatted so you can easily input them into your favorite aligner, phylogenetic tree construction program, the NCBI BLAST server, etc.
+*file*
+BTyper genefiles, (multi)fasta files which contain the sequences of all genes detected in a run. For virulence gene typing, a file will be created for each virulence gene detected in a genome that meet your specified thresholds. The sequence of the best-matching gene/allele using its BLAST bit score is printed to the genefile. If -\-virulence_database aa is selected (the default for BTyper), the amino acid sequence is printed. If -\-virulence_database nuc, is selected, the nucleotide sequence is reported. For MLST, 7 files are created (one for each of the 7 alleles). *rpoB*, *panC*, and 16S typing each produce one genefile. If BTyper is run using more than 1 genome as input (either in multifasta format, or if BTyper is run in a loop), genes from each genome are aggregated together in each genefile. These files are formatted so you can easily input them into your favorite aligner, phylogenetic tree construction program, the NCBI BLAST server, etc.
 
 **isolatefiles**
-  *directory*
-  Directory in which BTyper deposits results directories for individual genomes. BTyper creates this directory within the btyper_final_results directory within your specified output directory (output_directory/btyper_final_results/isolatefiles).
+*directory*
+Directory in which BTyper deposits results directories for individual genomes. BTyper creates this directory within the btyper_final_results directory within your specified output directory (output_directory/btyper_final_results/isolatefiles).
 
 ***your_genome_results***
-  *directory*
-  Directory in which BTyper deposits additional results files for each input genome. BTyper creates this directory within the isolatefiles directory (output_directory/btyper_final_results/isolatefiles/*your_genome*_results). Within this directory, you'll find detailed tab-separated results files for each typing analysis performed, as well as fasta files containing genes extracted from the genome in question. If you're interested in virulence genes present in multiple copies in a genome, the location of each gene in a genome, sequences of all virulence genes detected in a particular isolate, alleles other than the best-matching one, etc., they will be deposited here.
+*directory*
+Directory in which BTyper deposits additional results files for each input genome. BTyper creates this directory within the isolatefiles directory (output_directory/btyper_final_results/isolatefiles/*your_genome*_results). Within this directory, you'll find detailed tab-separated results files for each typing analysis performed, as well as fasta files containing genes extracted from the genome in question. If you're interested in virulence genes present in multiple copies in a genome, the location of each gene in a genome, sequences of all virulence genes detected in a particular isolate, alleles other than the best-matching one, etc., they will be deposited here.
 
 
 ------------------------------------------------------------------------
   
   
-  ## Frequently Asked Questions
+## Frequently Asked Questions
   
- * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
+* **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
   
 Sure! You don't have to use whole-genome sequences as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
 
@@ -302,7 +302,7 @@ Technically yes! You can use whole-genome sequencing data from any bacterial spe
 ------------------------------------------------------------------------
   
   
-  ## BTyper Tutorial #1: Characterizing a *B. cereus* isolate using its draft genome
+## BTyper Tutorial #1: Characterizing a *B. cereus* isolate using its draft genome
   
 1. First, let's download our isolate's draft genome from NCBI by clicking the follwoing link:
   
@@ -380,7 +380,6 @@ Sure enough, this genome is actually that of *B. cereus* strain BcFL2013, which 
 
 9. If you want to delete the results from this tutorial, just go to your Downloads folder and delete the "btyper_tutorial_1" directory there.
 
-
 ------------------------------------------------------------------------
 
 ## BTyper Tutorial #2: Extracting *plcR* nucleotide sequences from 3 *B. cereus* group assemblies using their closed chromosomes
@@ -390,17 +389,13 @@ Sure enough, this genome is actually that of *B. cereus* strain BcFL2013, which 
 2. First, let's move to our Downloads directory by typing the following, and pressing **Enter**:
 
 ```
-
 cd ~/Downloads
-
 ```
 
 3. Let's create a project directory; type the following command to create a directory called "btyper_tutorial_2":
 
 ```
-
 mkdir btyper_tutorial_2
-
 ```
 
 4. Let's download 3 *B. cereus* group chromosomes from NCBI, starting with *B. anthracis* Ames Ancestor:
@@ -412,14 +407,12 @@ mkdir btyper_tutorial_2
 * Move your sequence to the btyper_tutorial_2 directory and rename it to ames_ancestor.fasta by typing the following command and pressing **Enter:**
 
 ```
-
 mv sequence.fasta btyper_tutorial_2/ames_ancestor.fasta
-
 ```
                                                                                                               
 * Repeat steps (i) through (iii), replacing the URL and new file name (ames_ancestor.fasta) with the following:
-                                                                                                                                https://www.ncbi.nlm.nih.gov/nuccore/NC_004722.1 (rename to atcc_14579.fasta), 
-                                                                                                                              https://www.ncbi.nlm.nih.gov/nuccore/NC_005957.1 (rename to konkukian.fasta)
+                                                                                                                               https://www.ncbi.nlm.nih.gov/nuccore/NC_004722.1 (rename to atcc_14579.fasta), 
+                                                                                                                             https://www.ncbi.nlm.nih.gov/nuccore/NC_005957.1 (rename to konkukian.fasta)
                                                                                                                               
                                                                                                                               
 5. Move to your btyper_tutorial_2 by typing the following command and pressing **Enter:**
@@ -429,18 +422,16 @@ cd ~/Downloads/btyper_tutorial_2
 ```
 
                                                                                                                              
-6. Next, let's concatenate all 3 chromosomes together to form a multifasta called "bacillus.fasta" by typing the following command and pressing **Enter:** 
+6. Next, let's concatenate all 3 chromosomes together to form a multifasta called "bacillus.fasta" by typing the following command and pressing **Enter:**
 
 ```
-                                                                                                                             cat *.fasta > bacillus.fasta
-                                                                                                                             ```
+cat *.fasta > bacillus.fasta
+```
                                                                                                                              
 7. Run BTyper to extract the *plcR* nucleotide sequence from each of our 3 genomes by typing the following command: 
 
 ```
-
 btyper -t seq -i bacillus.fasta -o . -m False -r False -p False -v_db nuc -nuc_p 0 -nuc_q 0
-
 ```
 
 Here are the options we selected, explained:
@@ -495,7 +486,6 @@ We're lowering the percent coverage threshold for virulence gene detection using
 
 ```
 mkdir ~/Downloads/btyper_tutorial_3
-
 ```
 
 3. We're going to be assembling the genome and characterizing the following isolate, so let's make sure it meets BTyper's criteria for assembly: https://www.ncbi.nlm.nih.gov/sra/ERX1840887
@@ -505,9 +495,7 @@ We need to make sure this genome was sequenced using ILLUMINA reads (either sing
 4. It looks like this genome was sequenced with 150 bp paired-end reads. If we were in a hurry, the default k-mer size parameters that BTyper passes to SPAdes to assemble the genome (-\-spades_k 77) should suffice. However, SPAdes is a great assembler, and we want to take advantage of that; let's try to produce an optimal assembly for 150 bp reads by testing multiple k-mer sizes and having SPAdes pick the best one. To do this, type the following command and press **Enter.** This will download sequence data from SRA, assemble and correct mismatches in the genome using SPAdes, and perform all default typing methods using BTyper...but be prepared to wait a little while (about 30 minutes to run the example below, but this depends on your computer, the k-mer sizes you select, your memory/thread parameters, etc.)
 
 ```
-
 btyper -t sra-get -i ERR1775894 -o ~/Downloads/btyper_tutorial_3 --spades_k 21,33,55,77 --spades_m 8 --spades_t 8
-
 ```
 
 Here is our command, explained:
