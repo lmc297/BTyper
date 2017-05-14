@@ -24,7 +24,7 @@ If you found the BTyper tool, its source code, and/or any of its associated data
   
   #### Command structure:
   
-  ```
+```
 btyper -t [input data type] -i [input file(s)] -o [output directory] [options...]
 ```
 
@@ -36,37 +36,37 @@ For your current version, type `btyper --version`
 
 **Using a fasta/multifasta containing 1 or more closed genomes:**
   
-  ```
+```
 btyper -t seq -i my_genomes.fasta -o /path/to/output_directory
 ```
 
 **Using a fasta file containing contigs or scaffolds (concatenates contigs/scaffolds into a pseudochromosome):**
   
-  ```
+```
 btyper -t seq -i my_draftgenome.fasta -o /path/to/output_directory --draft_genome
 ```
 
 **Using ILLUMINA paired-end reads in fastq.gz format (calls SPAdes to assemble):**
   
-  ```
+```
 btyper -t pe -i forward_reads.fastq.gz reverse_reads.fastq.gz -o /path/to/output_directory
 ```
 
 **Using ILLUMINA single-end reads in fastq.gz format (calls SPAdes to assemble):**
   
-  ```
+```
 btyper -t se -i illumina_reads.fastq.gz -o /path/to/output_directory
 ```
 
 **Using ILLUMINA single- or paired-end reads in SRA (sequence read archive) format (calls SPAdes to assemble):**
   
-  ```
+```
 btyper -t sra -i illumina_reads.sra -o /path/to/output_directory
 ```
 
 **Using an SRA accession number corresponding to ILLUMINA single- or paired-end reads (downloads reads from SRA, calls SPAdes to assemble):**
   
-  ```
+```
 btyper -t sra-get -i SRAXXXXXXX -o /path/to/output_directory
 ```
 
@@ -80,25 +80,25 @@ btyper -t sra-get -i SRAXXXXXXX -o /path/to/output_directory
 
 1. First, install Homebrew, if necessary, by running the following command from your terminal:
   
-  ```
+```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 2. Tap Homebrew Science, if necessary, by running the following command from your terminal:
   
-  ```
+```
 brew tap homebrew/science
 ```
 
 3. Tap BTyper by running the following command from your terminal:
   
-  ```
+```
 brew tap lmc297/homebrew-btyper
 ```
 
 4. Install BTyper and its dependencies by running the following command from your terminal:
   
-  ```
+```
 brew install btyper
 ```
 
@@ -145,7 +145,7 @@ Note: In the examples below, BTyper commands are shown as ```btyper [options...]
   
   The command line version of BTyper supports the following file formats as input:
   
-  1. **Nucleotide sequences in fasta or multifasta format** (1 fasta file per genome or multiple genomes per fasta file)
+1. **Nucleotide sequences in fasta or multifasta format** (1 fasta file per genome or multiple genomes per fasta file)
 
 2. **Draft genome contigs and scaffolds in fasta format** (1 fasta file per genome)
 
@@ -161,7 +161,7 @@ Note: In the examples below, BTyper commands are shown as ```btyper [options...]
 
 BTyper can be run from your terminal with the following command line:
   
-  ```
+```
 btyper -t [input data type] -i [input file(s)] -o [output directory] [options...]
 ```
 
@@ -357,173 +357,191 @@ We're working with a single genome formed by multiple contigs in a single file. 
 
 8. Now that we've opened the final results file for our isolate, we can see information about our isolate, divided into several parts:
   
-  * **Predicted Virulence Proteins**
+* **Predicted Virulence Proteins**
   
-  This is a list of proteins detected in our genome at 70\% coverage and 50\% identity using an amino acid sequence database (BTyper's default settings for virulence typing). Looking through the list of virulence genes, it seems that our isolate possesses a couple of *B. anthracis*-associated genes with really high similarity, including anthrax toxin genes *cya, lef,* and *pagA*!
-                                                                                                                              
-                                                                                                                              * **Predicted *panC* Clade Designation**
-                                                                                                                              
-                                                                                                                              This corresponds to our isolate's *panC* clade assignment. It looks like the closest-matching *panC* sequence was that of *B. cereus* 03BB87, which belongs to *panC* Clade III, the same clade as *B. anthracis*.
-                                                                                                                              
-                                                                                                                              * **Predicted MLST Profile**
-                                                                                                                                
-                                                                                                                                This section contains our isolate's allelic types for 7-gene MLST, as well as the associated sequence type. It looks like our *B. cereus* isolate belongs to ST 78, matching with 100\% identity.
-                                                                                                                              
-                                                                                                                              * **Predicted *rpoB* Allelic Type**
-                                                                                                                              
-                                                                                                                              This section contains the closest-matching *rpoB* allelic type for our isolate. Our isolate's *rpoB* allele appears to match allelic type 365 exactly, which matched *B. cereus* most closely when the NCBI BLAST server was used.
-                                                                                                                              
-                                                                                                                              * **Predicted 16S Type**
-                                                                                                                                
-                                                                                                                                This section contains the closest-matching 16S gene of *B. cereus* group type strains. While out isolate looks like it matches *B. cereus* ATCC 14579 most closely, we should interpret all 16S typing results with caution. 
-                                                                                                                              
-                                                                                                                              Sure enough, this genome is actually that of *B. cereus* strain BcFL2013, which was isolated from a patient with an anthrax-like skin lesion in Florida (Gee, et al., 2014, *Genome Announcements*). It's been shown to possess anthrax toxin genes and belong to ST 78, the same ST as several other anthrax-causing *B. cereus* strains (Gee, et al., 2014, *Genome Announcements*).
-                                                                                                                              
-                                                                                                                              9. If you want to delete the results from this tutorial, just go to your Downloads folder and delete the "btyper_tutorial_1" directory there.
-                                                                                                                              
-                                                                                                                              
-                                                                                                                              ------------------------------------------------------------------------
-                                                                                                                              
-                                                                                                                              
-                                                                                                                              ## BTyper Tutorial #2: Extracting *plcR* nucleotide sequences from 3 *B. cereus* group assemblies using their closed chromosomes
-                                                                                                                              
-                                                                                                                              1. Open your terminal, as described in Tutorial #1 
-                                                                                                                              
-                                                                                                                              2. First, let's move to our Downloads directory by typing the following, and pressing **Enter**:
-                                                                                                                                
-                                                                                                                                ```
-                                                                                                                              cd ~/Downloads
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              3. Let's create a project directory; type the following command to create a directory called "btyper_tutorial_2":
-                                                                                                                              
-                                                                                                                              ```
-                                                                                                                              mkdir btyper_tutorial_2
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              4. Let's download 3 *B. cereus* group chromosomes from NCBI, starting with *B. anthracis* Ames Ancestor:
-                                                                                                                                
-                                                                                                                                * Click on the following link to go to the genome page: https://www.ncbi.nlm.nih.gov/nuccore/NC_007530.2 
-                                                                                                                              
-                                                                                                                              * In the upper-right corner, click "Send"->"Complete Record"->"File"->"FASTA". The sequence should begin downloading as a file named "sequence.fasta".
-                                                                                                                              
-                                                                                                                              * Move your sequence to the btyper_tutorial_2 directory and rename it to ames_ancestor.fasta by typing the following command and pressing **Enter:**
-                                                                                                                                
+This is a list of proteins detected in our genome at 70\% coverage and 50\% identity using an amino acid sequence database (BTyper's default settings for virulence typing). Looking through the list of virulence genes, it seems that our isolate possesses a couple of *B. anthracis*-associated genes with really high similarity, including anthrax toxin genes *cya, lef,* and *pagA*!
+
+* ** Predicted *panC* Clade Designation**
+This corresponds to our isolate's *panC* clade assignment. It looks like the closest-matching *panC* sequence was that of *B. cereus* 03BB87, which belongs to *panC* Clade III, the same clade as *B. anthracis*.
+
+* **Predicted MLST Profile**
+
+This section contains our isolate's allelic types for 7-gene MLST, as well as the associated sequence type. It looks like our *B. cereus* isolate belongs to ST 78, matching with 100\% identity.
+
+* **Predicted *rpoB* Allelic Type**
+
+This section contains the closest-matching *rpoB* allelic type for our isolate. Our isolate's *rpoB* allele appears to match allelic type 365 exactly, which matched *B. cereus* most closely when the NCBI BLAST server was used.
+
+* **Predicted 16S Type**
+
+This section contains the closest-matching 16S gene of *B. cereus* group type strains. While out isolate looks like it matches *B. cereus* ATCC 14579 most closely, we should interpret all 16S typing results with caution.
+
+Sure enough, this genome is actually that of *B. cereus* strain BcFL2013, which was isolated from a patient with an anthrax-like skin lesion in Florida (Gee, et al., 2014, *Genome Announcements*). It's been shown to possess anthrax toxin genes and belong to ST 78, the same ST as several other anthrax-causing *B. cereus* strains (Gee, et al., 2014, *Genome Announcements*).
+
+9. If you want to delete the results from this tutorial, just go to your Downloads folder and delete the "btyper_tutorial_1" directory there.
+
+
+------------------------------------------------------------------------
+
+## BTyper Tutorial #2: Extracting *plcR* nucleotide sequences from 3 *B. cereus* group assemblies using their closed chromosomes
+
+1. Open your terminal, as described in Tutorial #1
+
+2. First, let's move to our Downloads directory by typing the following, and pressing **Enter**:
+
+```
+
+cd ~/Downloads
+
+```
+
+3. Let's create a project directory; type the following command to create a directory called "btyper_tutorial_2":
+
+```
+
+mkdir btyper_tutorial_2
+
+```
+
+4. Let's download 3 *B. cereus* group chromosomes from NCBI, starting with *B. anthracis* Ames Ancestor:
+
+* Click on the following link to go to the genome page: https://www.ncbi.nlm.nih.gov/nuccore/NC_007530.2
+
+* In the upper-right corner, click "Send"->"Complete Record"->"File"->"FASTA". The sequence should begin downloading as a file named "sequence.fasta".
+
+* Move your sequence to the btyper_tutorial_2 directory and rename it to ames_ancestor.fasta by typing the following command and pressing **Enter:**
                                                                                                                                 ```
                                                                                                                               mv sequence.fasta btyper_tutorial_2/ames_ancestor.fasta
                                                                                                                               ```
                                                                                                                               
-                                                                                                                              * Repeat steps (i) through (iii), replacing the URL and new file name (ames_ancestor.fasta) with the following:
+
+* Repeat steps (i) through (iii), replacing the URL and new file name (ames_ancestor.fasta) with the following:
                                                                                                                                 https://www.ncbi.nlm.nih.gov/nuccore/NC_004722.1 (rename to atcc_14579.fasta), 
                                                                                                                               https://www.ncbi.nlm.nih.gov/nuccore/NC_005957.1 (rename to konkukian.fasta)
                                                                                                                               
-                                                                                                                              5. Move to your btyper_tutorial_2 by typing the following command and pressing **Enter:**
-                                                                                                                                
-                                                                                                                                ```
-                                                                                                                              cd ~/Downloads/btyper_tutorial_2
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              6. Next, let's concatenate all 3 chromosomes together to form a multifasta called "bacillus.fasta" by typing the following command and pressing **Enter:**
-                                                                                                                              
-                                                                                                                              ```
-                                                                                                                              cat *.fasta > bacillus.fasta
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              7. Run BTyper to extract the *plcR* nucleotide sequence from each of our 3 genomes by typing the following command:
-                                                                                                                              
-                                                                                                                              ```
-                                                                                                                              btyper -t seq -i bacillus.fasta -o . -m False -r False -p False -v_db nuc -nuc_p 0 -nuc_q 0
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              Here are the options we selected, explained:
-                                                                                                                              
-                                                                                                                              * **-t seq**
-                                                                                                                              Because our sequence is in multifasta format, we're declaring our input type to be seq
-                                                                                                                              
-                                                                                                                              * **-i bacillus.fasta**
-                                                                                                                                We're directing BTyper to our input file
-                                                                                                                              
-                                                                                                                              * **-o .**
-                                                                                                                              We're telling BTyper where to store the output files in our current directory (btyper_tutorial_2) 
-                                                                                                                              
-                                                                                                                              * **-m False**
-                                                                                                                                We only want to perform virulence typing, so we are setting MLST to False
-                                                                                                                              
-                                                                                                                              * **-r False**
-                                                                                                                                We only want to perform virulence typing, so we are setting *rpoB* allelic typing to False
-                                                                                                                              
-                                                                                                                              * **-p False**
-                                                                                                                                We only want to perform virulence typing, so we are setting *panC* clade typing to False
-                                                                                                                              
-                                                                                                                              * **-v_db nuc**
-                                                                                                                                We want to extract virulence gene nucleotide sequences, so we are telling BTyper to use the nucleotide sequence database 
-                                                                                                                              
-                                                                                                                              * **-nuc_p 0**
-                                                                                                                                We're lowering the percent identity threshold for virulence gene detection using a nucleotide database
-                                                                                                                              
-                                                                                                                              * **-nuc_q 0**
-                                                                                                                              We're lowering the percent coverage threshold for virulence gene detection using a nucleotide database
-                                                                                                                              
-                                                                                                                              8. We can find our virulence gene nucleotide sequences deposited in the genefiles folder in our btyper_final_results directory. Our *plcR* nucleotide sequences will be labeled as plcR_genefile.fasta. We can then align the sequences in this file, build a phylogenetic tree, call SNPs, etc.
-                                                                                                                              
-                                                                                                                              9. If you want to delete the results from this tutorial, just go to your Downloads folder and delete the "btyper_tutorial_2" directory there.
-                                                                                                                              
-                                                                                                                              
-                                                                                                                              ------------------------------------------------------------------------
-                                                                                                                                
-                                                                                                                                
-                                                                                                                                ## BTyper Tutorial #3: Assembling and characterizing the genome of a clinical *B. cereus* isolate using its SRA accession number
-                                                                                                                                
-                                                                                                                                1. First, open up your terminal, as described in Tutorial #1
-                                                                                                                              
-                                                                                                                              2. Let's create a new directory named btyper_tutorial_3 in our Downloads directory by typing the following command into our terminal and pressing **Enter:**
-                                                                                                                              
-                                                                                                                              ```
-                                                                                                                              mkdir ~/Downloads/btyper_tutorial_3
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              3. We're going to be assembling the genome and characterizing the following isolate, so let's make sure it meets BTyper's criteria for assembly: https://www.ncbi.nlm.nih.gov/sra/ERX1840887
-                                                                                                                              
-                                                                                                                              We need to make sure this genome was sequenced using ILLUMINA reads (either single- or paired-end reads are fine; BTyper can infer this); according to SRA, it was sequenced using NextSeq 500, an ILLUMINA platform, so we should be good to go! Our isolate's SRA accession number appears to be ERR1775894.
-                                                                                                                              
-                                                                                                                              4. It looks like this genome was sequenced with 150 bp paired-end reads. If we were in a hurry, the default k-mer size parameters that BTyper passes to SPAdes to assemble the genome (-\-spades_k 77) should suffice. However, SPAdes is a great assembler, and we want to take advantage of that; let's try to produce an optimal assembly for 150 bp reads by testing multiple k-mer sizes and having SPAdes pick the best one. To do this, type the following command and press **Enter.** This will download sequence data from SRA, assemble and correct mismatches in the genome using SPAdes, and perform all default typing methods using BTyper...but be prepared to wait a little while (about 30 minutes to run the example below, but this depends on your computer, the k-mer sizes you select, your memory/thread parameters, etc.)
-                                                                                                                                
-                                                                                                                                ```
-                                                                                                                              btyper -t sra-get -i ERR1775894 -o ~/Downloads/btyper_tutorial_3 --spades_k 21,33,55,77 --spades_m 8 --spades_t 8
-                                                                                                                              ```
-                                                                                                                              
-                                                                                                                              Here is our command, explained:
-                                                                                                                                
-                                                                                                                                * **-t sra-get**
-                                                                                                                                Tell BTyper that our sequencing data type is an SRA accession number associated with ILLUMINA reads
-                                                                                                                              
-                                                                                                                              * **-i ERR1775894**
-                                                                                                                                This is our SRA accession number that we'd like BTyper to search for.
-                                                                                                                              
-                                                                                                                              * **-o ~/Downloads/btyper_tutorial_3**
-                                                                                                                              This is the path to the output directory in which we want BTyper to store our results (including our assembled genomes)
-                                                                                                                              
-                                                                                                                              * **-\-spades_k 21,33,55,77**
-                                                                                                                              This is a list of k-mer sizes we want SPAdes to try, recommended by the developers for use with 150 bp paired-end ILLUMINA reads (http://spades.bioinf.spbau.ru/release3.5.0/manual.html#sec3.4)
-                                                                                                                              
-                                                                                                                              * **-\-spades_m 8**
-                                                                                                                              This is the memory limit we want to pass to SPAdes, in Gb. Here, we're setting ours to 8 Gb, but feel free to change this, depending on your machine!
-                                                                                                                                
-                                                                                                                                * **-\-spades_t 8**
-                                                                                                                                This is the number of threads we want SPAdes to use. Here, we're using 8 threads, but feel free to change this, depending on your machine!
-                                                                                                                              
-                                                                                                                              5. Once our command is finished running, we can head to our output directory (btyper_tutorial_3). In addition to the usual btyper_final_results directory that BTyper produces, we should also see some additional files:
-                                                                                                                              
-                                                                                                                              * **ERR1775894_1.fastq.gz**, our forward reads from SRA
-                                                                                                                              
-                                                                                                                              * **ERR1775894_2.fastq.gz**, our reverse reads from SRA; if we were to input an SRA accession number associated with ILLUMINA single-end reads, we would only have 1 fastq.gz file of reads
-                                                                                                                              
-                                                                                                                              * **ERR1775894_1_spades_assembly.fasta**, our file of contigs produced using SPAdes. If more than one k-mer size is tested (like we did here), BTyper chooses the optimal one, as determined by SPAdes. In this case, a k-mer size of 77 (BTyper's default option for -\-spades_k) produced the best assembly, so BTyper selected this assembly for its analysis.
+5. Move to your btyper_tutorial_2 by typing the following command and pressing **Enter:**   
+```
+                                                                                                                             cd ~/Downloads/btyper_tutorial_2
+                                                                                                                             ```
+                                                                                                                             
+6. Next, let's concatenate all 3 chromosomes together to form a multifasta called "bacillus.fasta" by typing the following command and pressing **Enter:** 
 
-+ **ERR1775894_1_pseudochrom.fasta**, our pseudochromosome, formed by concatenating the contigs of our optimal assembly (in this case, ERR1775894_1_spades_assembly.fasta) using BTyper's -\-draft_genome option.
+```
+                                                                                                                             cat *.fasta > bacillus.fasta
+                                                                                                                             ```
+                                                                                                                             
+7. Run BTyper to extract the *plcR* nucleotide sequence from each of our 3 genomes by typing the following command: 
 
-+ **spades_assembly**, a directory produced by SPAdes (http://spades.bioinf.spbau.ru/release3.5.0/manual.html), containing its output files
+```
 
+btyper -t seq -i bacillus.fasta -o . -m False -r False -p False -v_db nuc -nuc_p 0 -nuc_q 0
+
+```
+
+Here are the options we selected, explained:
+
+* **-t seq**
+
+Because our sequence is in multifasta format, we're declaring our input type to be seq
+
+* **-i bacillus.fasta**
+
+We're directing BTyper to our input file
+
+* **-o .** 
+
+We're telling BTyper where to store the output files in our current directory (btyper_tutorial_2)
+
+* **-m False**
+
+We only want to perform virulence typing, so we are setting MLST to False
+
+* **-r False**
+
+We only want to perform virulence typing, so we are setting *rpoB* allelic typing to False
+
+* **-p False**
+
+We only want to perform virulence typing, so we are setting *panC* clade typing to False
+
+* **-v_db nuc**
+
+We want to extract virulence gene nucleotide sequences, so we are telling BTyper to use the nucleotide sequence database
+
+* **-nuc_p 0**
+
+We're lowering the percent identity threshold for virulence gene detection using a nucleotide database
+
+* **-nuc_q 0**
+
+We're lowering the percent coverage threshold for virulence gene detection using a nucleotide database
+
+8. We can find our virulence gene nucleotide sequences deposited in the genefiles folder in our btyper_final_results directory. Our *plcR* nucleotide sequences will be labeled as plcR_genefile.fasta. We can then align the sequences in this file, build a phylogenetic tree, call SNPs, etc.
+
+9. If you want to delete the results from this tutorial, just go to your Downloads folder and delete the "btyper_tutorial_2" directory there.
+                                                                                                                              
+                                                                                                                               ------------------------------------------------------------------------
+                                                                                                                               
+## BTyper Tutorial #3: Assembling and characterizing the genome of a clinical *B. cereus* isolate using its SRA accession number
+
+1. First, open up your terminal, as described in Tutorial #1
+
+2. Let's create a new directory named btyper_tutorial_3 in our Downloads directory by typing the following command into our terminal and pressing **Enter:**
+
+```
+mkdir ~/Downloads/btyper_tutorial_3
+
+```
+
+3. We're going to be assembling the genome and characterizing the following isolate, so let's make sure it meets BTyper's criteria for assembly: https://www.ncbi.nlm.nih.gov/sra/ERX1840887
+
+We need to make sure this genome was sequenced using ILLUMINA reads (either single- or paired-end reads are fine; BTyper can infer this); according to SRA, it was sequenced using NextSeq 500, an ILLUMINA platform, so we should be good to go! Our isolate's SRA accession number appears to be ERR1775894.
+
+4. It looks like this genome was sequenced with 150 bp paired-end reads. If we were in a hurry, the default k-mer size parameters that BTyper passes to SPAdes to assemble the genome (-\-spades_k 77) should suffice. However, SPAdes is a great assembler, and we want to take advantage of that; let's try to produce an optimal assembly for 150 bp reads by testing multiple k-mer sizes and having SPAdes pick the best one. To do this, type the following command and press **Enter.** This will download sequence data from SRA, assemble and correct mismatches in the genome using SPAdes, and perform all default typing methods using BTyper...but be prepared to wait a little while (about 30 minutes to run the example below, but this depends on your computer, the k-mer sizes you select, your memory/thread parameters, etc.)
+
+```
+
+btyper -t sra-get -i ERR1775894 -o ~/Downloads/btyper_tutorial_3 --spades_k 21,33,55,77 --spades_m 8 --spades_t 8
+
+```
+
+Here is our command, explained:
+
+* **-t sra-get**
+
+Tell BTyper that our sequencing data type is an SRA accession number associated with ILLUMINA reads
+
+* **-i ERR1775894**
+
+This is our SRA accession number that we'd like BTyper to search for.
+
+* **-o ~/Downloads/btyper_tutorial_3**
+
+This is the path to the output directory in which we want BTyper to store our results (including our assembled genomes)
+
+* **-\-spades_k 21,33,55,77**
+
+This is a list of k-mer sizes we want SPAdes to try, recommended by the developers for use with 150 bp paired-end ILLUMINA reads (http://spades.bioinf.spbau.ru/release3.5.0/manual.html#sec3.4)
+
+* **-\-spades_m 8**
+
+This is the memory limit we want to pass to SPAdes, in Gb. Here, we're setting ours to 8 Gb, but feel free to change this, depending on your machine!
+
+* **-\-spades_t 8**
+
+This is the number of threads we want SPAdes to use. Here, we're using 8 threads, but feel free to change this, depending on your machine!
+
+5. Once our command is finished running, we can head to our output directory (btyper_tutorial_3). In addition to the usual btyper_final_results directory that BTyper produces, we should also see some additional files:
+
+* **ERR1775894_1.fastq.gz**, our forward reads from SRA
+
+* **ERR1775894_2.fastq.gz**, our reverse reads from SRA; if we were to input an SRA accession number associated with ILLUMINA single-end reads, we would only have 1 fastq.gz file of reads
+
+* **ERR1775894_1_spades_assembly.fasta**, our file of contigs produced using SPAdes. If more than one k-mer size is tested (like we did here), BTyper chooses the optimal one, as determined by SPAdes. In this case, a k-mer size of 77 (BTyper's default option for -\-spades_k) produced the best assembly, so BTyper selected this assembly for its analysis.
+
+* **ERR1775894_1_pseudochrom.fasta**, our pseudochromosome, formed by concatenating the contigs of our optimal assembly (in this case, ERR1775894_1_spades_assembly.fasta) using BTyper's -\-draft_genome option.
+
+* **spades_assembly**, a directory produced by SPAdes (http://spades.bioinf.spbau.ru/release3.5.0/manual.html), containing its output files                                                                                                                           
 6. We can then go into our btyper_final_results directory to look at our typing results. From a quick glance at the ERR1775894_1_final_results.txt file, it looks like our isolate belongs to MLST sequence type 26, *rpoB* allelic type 125, and *panC* clade 3. Not only that, it looks like our isolate may produce the *B. cereus* emetic toxin; *cesABCD* were all detected in the assembly at high identity/coverage!
 
 7. To delete results from this tutorial, just delete the btyper_tutorial_3 folder in your Downloads folder.
