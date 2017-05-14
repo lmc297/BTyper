@@ -314,19 +314,19 @@ If not already selected, click the "Download" tab. Click on the link for the FAS
 
 3. From the command line in your terminal, move to your "Downloads directory" by typing the following, and then hitting **Enter**:
   
-  ```
+```
 cd ~/Downloads
 ```
 
 4. Now that we're in our Downloads directory, let's unzip our contigs file by typing the following command, and hitting **Enter**:
   
-  ```
+```
 gunzip JHQN01.1.fsa_nt.gz
 ```
 
 5. Let's create an output directory in which we can store our BTyper results. That way, once we're done with this tutorial, we can easily delete everything. To create a directory called "btyper_tutorial_1" in our Downloads directory, type the following command and hit **Enter**:
   
-  ```
+```
 mkdir ~/Downloads/btyper_tutorial_1
 ```
 
