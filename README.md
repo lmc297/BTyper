@@ -9,6 +9,8 @@ The program, as well as the associated databases, can be downloaded from https:/
 
 Post issues at https://github.com/lmc297/BTyper/issues
 
+BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be downloaded from https://github.com/lmc297/BTyper/raw/master/archive/sample_data/ncbi_btyper_final_results.zip.
+
 
 ### Citation
 
