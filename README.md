@@ -1,9 +1,11 @@
 # BTyper
-## A computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data
+## A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
 
 ## Overview
 
 BTyper is a command-line tool that employs a combination of (i) virulence gene-based typing, (ii) multi-locus sequence typing (MLST), (iii) panC clade typing, and (iv) rpoB allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data.
+
+Additionally, antimicrobial resistance (AMR) gene detection was added in BTyper version 2.0.0 (released 2017-06-29), a function that can be used with sequencing data from any bacterial species.
 
 The program, as well as the associated databases, can be downloaded from https://github.com/lmc297/BTyper.
 
@@ -14,9 +16,13 @@ BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be d
 
 ### Citation
 
-If you found the BTyper tool, its source code, and/or any of its associated databases useful, please cite:
+#### If you found the BTyper tool, its source code, and/or any of its associated databases useful, please cite:
   
-Carroll, Laura M., Jasna Kovac, Rachel A. Miller, Martin Wiedmann. 2017. Rapid, high-throughput identification of anthrax-causing and emetic *Bacillus cereus* group genome assemblies using BTyper, a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data. Submitted to *Applied and Environmental Microbiology*.
+Carroll, Laura M., Jasna Kovac, Rachel A. Miller, Martin Wiedmann. 2017. Rapid, high-throughput identification of anthrax-causing and emetic *Bacillus cereus* group genome assemblies using BTyper, a computational tool for virulence-based classification of *Bacillus cereus* group isolates using nucleotide sequencing data. *Applied and Environmental Microbiology* 2017 Jun 16. pii: AEM.01096-17. doi: 10.1128/AEM.01096-17.
+
+#### Additionally, if you found BTyper's antimicrobial resistance (AMR) gene detection methods useful (particularly if you used them in non-*Bacillus cereus* group species), you may find the following paper to be helpful; in it, we implement and validate the AMR gene detection method employed by BTyper in *Salmonella enterica*:
+
+Carroll, Laura M., Martin Wiedmann, Henk den Bakker, Julie Siler, Steven Warchocki, David Kent, Svetlana Lyalina, Margaret Davis, William Sischo, Thomas Besser, Lorin D. Warnick, Richard V. Pereira. Whole-Genome Sequencing of Drug-Resistant *Salmonella enterica* Isolated from Dairy Cattle and Humans in New York and Washington States Reveals Source and Geographic Associations. *Applied and Environmental Microbiology* 2017 May 31;83(12).
 
 
 ------------------------------------------------------------------------
@@ -231,6 +237,17 @@ Number of threads for SPAdes. Optional argument for use with ILLUMINA reads (-\-
 Comma-separated list of k-mer sizes to be used for SPAdes (all values must be odd, less than 128 and listed in ascending order). Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -k option in SPAdes. Default is set to 77.
 Note: We recommend selecting optimum k-mer size(s) for your specific data set by consulting the SPAdes documentation. Currently, SPAdes recommends using -k 21,33,55,77 for 150 bp ILLUMINA paired-end reads, and -k 21,33,55,77,99,127 for 250 bp ILLUMINA paired-end reads. 
 
+**-\-amr/-a [True or False]**
+Antimicrobial resistance gene detection. Detects antimicrobial resistance genes using the ARG-ANNOT antimicrobial resistance gene database clustered at an identity of 0.8 using cd-hit-est.<sup>*</sup> Reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True.
+
+**-\-amr_p  [integer between 0 and 100]**
+Minimum percent nucleotide identity for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify the minimum percent nucleotide identity needed for an antimicrobial resistance gene to be considered present in a sequence. Default is set to 75.
+
+**-\-amr_q  [integer between 0 and 100]**
+Minimum nucleotide query coverage for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify the minimum percent query coverage needed for an antimicrobial resistance gene to be considered present in a sequence. Default is set to 50.
+
+<sup>*</sup>The antimicrobial resistance (AMR) gene detection method employed by BTyper is similar to the one described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/28389536">Carroll, et al.; rather than using the reduced database described in the manuscript, BTyper uses the full <a href="https://www.ncbi.nlm.nih.gov/pubmed/24145532">ARG-ANNOT</a> antimicrobial resistance gene database, clustered at 80% identity using <a href="http://weizhongli-lab.org/cd-hit/">cd-hit-est</a> and selects the best-matching AMR allele from each AMR gene cluster (as was done by <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-014-0090-6">Inouye, et al.</a>).
+
 
 ------------------------------------------------------------------------
   
@@ -249,6 +266,9 @@ Final results text file, 1 per input genome. BTyper creates this final results t
   
 * **If virulence typing is being performed (-\-virulence True):**
 A tab-separated list of virulence genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
+
+* **If antimicrobial resistance gene detection is being performed (-\-amr True):**
+A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
 
 * **If *panC* clade typing is being performed (-\-panC True):**
 A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at \geq 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at \geq 75\% identity but \leq 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
@@ -276,7 +296,7 @@ Directory in which BTyper deposits genefiles, (multi)fasta files which contain t
 
 ***some_gene_genefile.fasta***
 *file*
-BTyper genefiles, (multi)fasta files which contain the sequences of all genes detected in a run. For virulence gene typing, a file will be created for each virulence gene detected in a genome that meet your specified thresholds. The sequence of the best-matching gene/allele using its BLAST bit score is printed to the genefile. If -\-virulence_database aa is selected (the default for BTyper), the amino acid sequence is printed. If -\-virulence_database nuc, is selected, the nucleotide sequence is reported. For MLST, 7 files are created (one for each of the 7 alleles). *rpoB*, *panC*, and 16S typing each produce one genefile. If BTyper is run using more than 1 genome as input (either in multifasta format, or if BTyper is run in a loop), genes from each genome are aggregated together in each genefile. These files are formatted so you can easily input them into your favorite aligner, phylogenetic tree construction program, the NCBI BLAST server, etc.
+BTyper genefiles, (multi)fasta files which contain the sequences of all genes detected in a run. For virulence gene typing and antimicrobial resistance (AMR) gene detection, a file will be created for each virulence/AMR gene detected in a genome that meet your specified thresholds. The sequence of the best-matching gene/allele using its BLAST bit score is printed to the genefile. For virulence typing, if -\-virulence_database aa is selected (the default for BTyper), the amino acid sequence is printed. If -\-virulence_database nuc, is selected, the nucleotide sequence is reported. For MLST, 7 files are created (one for each of the 7 alleles). *rpoB*, *panC*, and 16S typing each produce one genefile. If BTyper is run using more than 1 genome as input (either in multifasta format, or if BTyper is run in a loop), genes from each genome are aggregated together in each genefile. These files are formatted so you can easily input them into your favorite aligner, phylogenetic tree construction program, the NCBI BLAST server, etc.
 
 **isolatefiles**
 *directory*
@@ -284,7 +304,7 @@ Directory in which BTyper deposits results directories for individual genomes. B
 
 ***your_genome_results***
 *directory*
-Directory in which BTyper deposits additional results files for each input genome. BTyper creates this directory within the isolatefiles directory (output_directory/btyper_final_results/isolatefiles/*your_genome*_results). Within this directory, you'll find detailed tab-separated results files for each typing analysis performed, as well as fasta files containing genes extracted from the genome in question. If you're interested in virulence genes present in multiple copies in a genome, the location of each gene in a genome, sequences of all virulence genes detected in a particular isolate, alleles other than the best-matching one, etc., they will be deposited here.
+Directory in which BTyper deposits additional results files for each input genome. BTyper creates this directory within the isolatefiles directory (output_directory/btyper_final_results/isolatefiles/*your_genome*_results). Within this directory, you'll find detailed tab-separated results files for each typing analysis performed, as well as fasta files containing genes extracted from the genome in question. If you're interested in virulence/AMR genes present in multiple copies in a genome, the location of each gene in a genome, sequences of all virulence genes detected in a particular isolate, alleles other than the best-matching one, etc., they will be deposited here.
 
 
 ------------------------------------------------------------------------
@@ -298,7 +318,7 @@ Sure! You don't have to use whole-genome sequences as input; you can technically
 
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
-Technically yes! You can use whole-genome sequencing data from any bacterial species as input; in fact, BTyper's *rpoB* allelic type database provided by Cornell's Food Safety Lab actually contains allelic types for non-*Bacillus* species. However, your results from certain typing analyses (i.e. MLST using the *B. cereus* group typing scheme) may be completely meaningless. Be extra cautious when interpreting them, and always take identity and coverage values for detected genes into consideration.
+Yes! You can use whole-genome sequencing data from any bacterial species as input; in fact, BTyper's *rpoB* allelic type database provided by Cornell's Food Safety Lab actually contains allelic types for non-*Bacillus* species. Additionally, we've implemented antimicrobial resistance (AMR) gene detection using the ARG-ANNOT database in version 2.0.0 of BTyper, which may be used with any bacterial species. However, your results from certain typing analyses (i.e. MLST using the *B. cereus* group typing scheme) may be completely meaningless. Be extra cautious when interpreting them, and always take identity and coverage values for detected genes into consideration.
 
 
 ------------------------------------------------------------------------
@@ -570,6 +590,17 @@ Kovac, Jasna, et al. Production of hemolysin BL by *Bacillus cereus* group isola
 PubMLST *Bacillus cereus* MLST database (https://pubmlst.org/bcereus/), based on Jolley, Keith A. and Martin CJ Maiden. BIGSdb: Scalable analysis of bacterial genome variation at the population level. *BMC Bioinformatics* 2010 11:595.
 
 Rossi-Tamisier, M., et al. Cautionary tale of using 16S rRNA gene sequence similarity values in identification of human-associated bacterial species. *International Journal of Systematic and Evolutionary Microbiology* (2015), 65, 1929–1934.
+
+#### Antimicrobial Resistance (AMR) Gene Detection
+
+Carroll, Laura M., et al. Whole-Genome Sequencing of Drug-Resistant *Salmonella enterica* Isolates from Dairy Cattle and Humans in New York and Washington States Reveals Source and Geographic Associations. *Applied and Environmental Microbiology* 2017 May 31;83(12).
+
+Fu, L., et al. CD-HIT: accelerated for clustering the next-generation sequencing data. *Bioinformatics* 2012 Dec 1;28(23):3150-2.
+
+Gupta, SK, et al. ARG-ANNOT, a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes. *Antimicrobial Agents and Chemotherapy* 2014;58(1):212-20.
+
+Inouye, M., Harriet Dashnow, Lesley-Ann Raven, Mark B Schultz, Bernard J Pope, Takehiro Tomita, Justin Zobel and Kathryn E Holt. SRST2: Rapid genomic surveillance for public health and hospital microbiology labs. *Genome Medicine* 2014 Nov 20;6(11):90.
+
 
 #### Tutorial Genomes
 
