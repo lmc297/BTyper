@@ -314,7 +314,7 @@ Directory in which BTyper deposits additional results files for each input genom
   
 * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
   
-Sure! You don't have to use whole-genome sequences as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
+Sure! You don't have to use whole-genome sequences as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence and antimicrobial resistance genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
 
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
