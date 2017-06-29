@@ -112,11 +112,11 @@ brew install btyper
   
   <a href="http://biopython.org/DIST/docs/install/Installation.html"> Biopython v. 1.6.9</a>
   
-  <a href="https://github.com/Homebrew/homebrew-science/blob/master/blast.rb">BLAST+ v. 2.4.0</a>
+  <a href="https://github.com/Homebrew/homebrew-science/blob/master/blast.rb">BLAST+ v. 2.4.0 or higher</a>
   
-  <a href="https://github.com/Homebrew/homebrew-science/blob/master/spades.rb">SPAdes v. 3.9.0</a>
+  <a href="https://github.com/Homebrew/homebrew-science/blob/master/spades.rb">SPAdes v. 3.9.0 or higher</a>
   
-  <a href="https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation">SRA toolkit v. 2.8.0</a>
+  <a href="https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation">SRA toolkit v. 2.8.0 or higher</a>
   
   2. Download the BTyper's source file, and store it in your directory of choice:
 
