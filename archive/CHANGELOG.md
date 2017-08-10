@@ -2,6 +2,12 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.0.1] 2017-08-09
+
+### Added
+- Updated formatted (see version 2.0.0) ARG-ANNOT database to reflect ARG-ANNOT version 3 (March 2017)
+- Added bpsXABCDEFGH operon (alternative capsule protein-encoding genes for some anthrax-causing B. cereus s.s. strains) to virulence gene databases
+
 ## [2.0.0] 2017-06-29
 
 ### Added
