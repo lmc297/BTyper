@@ -2,6 +2,15 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.0.2] 2017-08-16
+
+### Added
+- Included formatted MEGARes database (current version 1.0.1) for antimicrobial resistance gene detection as an option
+- Included tblastx as an option for antimicrobial resistance gene detection
+
+### Changed
+- Updated ARG-ANNOT database to include all alleles present in the database version 3 (Note: in BTyper version 2.0.1 and 2.0.0, only representative alleles selected by clustering using cd-hit-est were used)
+
 ## [2.0.1] 2017-08-09
 
 ### Added
