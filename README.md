@@ -237,14 +237,21 @@ Number of threads for SPAdes. Optional argument for use with ILLUMINA reads (-\-
 Comma-separated list of k-mer sizes to be used for SPAdes (all values must be odd, less than 128 and listed in ascending order). Optional argument for use with ILLUMINA reads (-\-type pe, -\-type se, -\-type sra, or -\-type sra-get). BTyper passes this parameter to the -k option in SPAdes. Default is set to 77.
 Note: We recommend selecting optimum k-mer size(s) for your specific data set by consulting the SPAdes documentation. Currently, SPAdes recommends using -k 21,33,55,77 for 150 bp ILLUMINA paired-end reads, and -k 21,33,55,77,99,127 for 250 bp ILLUMINA paired-end reads. 
 
-**-\-amr/-a [True or False]**
+**-a/-\-amr [True or False]**
 Antimicrobial resistance gene detection. Detects antimicrobial resistance genes using the ARG-ANNOT antimicrobial resistance gene database clustered at an identity of 0.8 using cd-hit-est.<sup>*</sup> Reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True.
+
+**-amr_db/-\-amr_database [argannot or megares]**
+Antimicrobial resistance gene database to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database argannot to use the ARG-ANNOT nucleotide database (clustered at 0.8 identity using cd-hit-est, with the top-scoring allele reported from each cluster), or -\-amr_database megares to use the MEGARes nucleotide database (clustered by the MEGARes-defined Group level, with the top scoring allele reported from each cluster). Default is set to argannot (ARG-ANNOT database).
 
 **-\-amr_p  [integer between 0 and 100]**
 Minimum percent nucleotide identity for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify the minimum percent nucleotide identity needed for an antimicrobial resistance gene to be considered present in a sequence. Default is set to 75.
 
 **-\-amr_q  [integer between 0 and 100]**
 Minimum nucleotide query coverage for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify the minimum percent query coverage needed for an antimicrobial resistance gene to be considered present in a sequence. Default is set to 50.
+
+**-\-amr_blast [blastn or tblastx]**
+BLAST algorithm to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database blastn to use nucleotide BLAST against the selected antimicrobial resistance gene database, or -\-amr_database tblastx to use a translated nucleotide database and a translated nucleotide query. Default is set to blastn (nucleotide BLAST).
+Note: tblastx compares a nucleotide query sequence against a nucleotide sequence database, both of which are dynamically translated in all six reading frames. As a result, -\-amr_blast tblastx will take significantly longer than -\-amr_blast blastn (antimicrobial resistance gene detection using the ARG-ANNOT database for 9 *B. cereus* group draft assemblies (contigs) with -\-amr_blast tblastx and default thresholds takes ~24 minutes, while -\-amr_blast blastn and default thresholds takes ~30 seconds).
 
 <sup>*</sup>The antimicrobial resistance (AMR) gene detection method employed by BTyper is similar to the one described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/28389536">Carroll, et al.</a>; rather than using the reduced database described in the manuscript, BTyper uses the full <a href="https://www.ncbi.nlm.nih.gov/pubmed/24145532">ARG-ANNOT</a> antimicrobial resistance gene database, clustered at 80% identity using <a href="http://weizhongli-lab.org/cd-hit/">cd-hit-est</a> and selects the best-matching AMR allele from each AMR gene cluster (as was done by <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-014-0090-6">Inouye, et al.</a>).
 
@@ -268,7 +275,7 @@ Final results text file, 1 per input genome. BTyper creates this final results t
 A tab-separated list of virulence genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
 
 * **If antimicrobial resistance gene detection is being performed (-\-amr True):**
-A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
+A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. The highest-scoring allele (using its blast bitscore) from its respective gene cluster is reported. Additionally, if a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
 
 * **If *panC* clade typing is being performed (-\-panC True):**
 A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
@@ -601,6 +608,8 @@ Gupta, SK, et al. ARG-ANNOT, a new bioinformatic tool to discover antibiotic res
 
 Inouye, M., Harriet Dashnow, Lesley-Ann Raven, Mark B Schultz, Bernard J Pope, Takehiro Tomita, Justin Zobel and Kathryn E Holt. SRST2: Rapid genomic surveillance for public health and hospital microbiology labs. *Genome Medicine* 2014 Nov 20;6(11):90.
 
+Lakin, S.M., et al. MEGARes: an antimicrobial resistance database for high throughput sequencing. *Nucleic Acids Research* 2017 Jan 4; 45(Database issue): D574–D580.
+
 
 #### Tutorial Genomes
 
@@ -610,7 +619,7 @@ Gee, JE, et al. Draft Genome Sequence of *Bacillus cereus* Strain BcFL2013, a Cl
 ------------------------------------------------------------------------
 
 
-Disclaimer: BTyper and BMiner are pretty neat! However, no tool is perfect, and BTyper and BMiner cannot definitively prove whether a *B. cereus* group isolate is pathogenic or not. As always, interpret your results with caution. We are not responsible for taxonomic misclassifications, misclassifications of an isolate's pathogenic potential, and/or misinterpretations (biological, statistical, or otherwise) of BTyper and/or BMiner results.
+Disclaimer: BTyper and BMiner are pretty neat! However, no tool is perfect, and BTyper and BMiner cannot definitively prove whether an isolate is pathogenic or not, or resistant to a particular antimicrobial. As always, interpret your results with caution. We are not responsible for taxonomic misclassifications, misclassifications of an isolate's pathogenic or antimicrobial resistance potential, and/or misinterpretations (biological, statistical, or otherwise) of BTyper and/or BMiner results.
 
 
 
