@@ -11,7 +11,7 @@ All noteable changes to BTyper will be documented in this file
 ### Changed
 - Updated ARG-ANNOT database to include all alleles present in the database version 3 (Note: in BTyper version 2.0.1 and 2.0.0, only representative alleles selected by clustering using cd-hit-est were used)
 - Changed "/" symbols in ARG-ANNOT fasta headers to "_"
-- Updated README to reflect addition of MEGARes database, addition of tblastx as an AMR gene detection algorithm
+- Updated README to reflect addition of MEGARes database and the addition of tblastx as an AMR gene detection algorithm; updated references and disclaimer
 
 ## [2.0.1] 2017-08-09
 
