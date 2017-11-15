@@ -92,19 +92,36 @@ btyper -t sra-get -i SRAXXXXXXX -o /path/to/output_directory
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-2. Tap Homebrew Science, if necessary, by running the following command from your terminal:
+2. Install pip, if necessary, by running the following command from your terminal:
+
+```
+sudo easy_install pip
+```
+
+3. Install Biopython, if necessary, by running the following command from your terminal:
+
+```
+pip install biopython
+```
+Note: if you don't have permissions, you may need to use sudo:
+
+```
+sudo pip install biopython
+```
+
+4. Tap Homebrew Science, if necessary, by running the following command from your terminal:
   
 ```
 brew tap homebrew/science
 ```
 
-3. Tap BTyper by running the following command from your terminal:
+5. Tap BTyper by running the following command from your terminal:
   
 ```
 brew tap lmc297/homebrew-btyper
 ```
 
-4. Install BTyper and its dependencies by running the following command from your terminal:
+6. Install BTyper and its dependencies by running the following command from your terminal:
   
 ```
 brew install btyper
@@ -321,7 +338,7 @@ Directory in which BTyper deposits additional results files for each input genom
   
 * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
   
-Sure! You don't have to use whole-genome sequences as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence and antimicrobial resistance genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
+Sure! You don't have to use whole-genome sequencing data as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence and antimicrobial resistance genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
 
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
