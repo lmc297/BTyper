@@ -2,6 +2,18 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.0.3] 2017-11-14
+
+### Changed
+- Fixed ARG-ANNOT antimicrobial resistance gene database (clusters 61 and 64) to have parentheses around (Phe)
+- Replaced “(“ and “)” in virulence database with “[“ and “]” for *bpsB* gene
+- Updated MLST database to reflect current PubMLST *B. cereus* database
+- Fixed btyper_path variable bug so users who run from source file (rather than install using Homebrew) do not need to run the program within the btyper-2.0.3 directory
+- Updated README to include instructions on how to install pip and biopython
+
+### Removed
+- Removed biopython installation from brew formula (lmc297/homebrew-btyper; see README on how to install using pip)
+
 ## [2.0.2] 2017-08-16
 
 ### Added
