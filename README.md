@@ -1,9 +1,19 @@
 # BTyper
 ## A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
 
-## Update to BTyper version 2.1.0: we have new species!
+## Update to BTyper version 2.1.0: 9 new *B. cereus* group species
 
-Because <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> 9 novel <i>B. cereus</i> group species</a> have been proposed and published, BTyper version 2.1.0, released on February 15, 2018, has some changes.
+We've updated BTyper version 2.1.0 (released February 15, 2018) to account for 9 *B. cereus* group species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al. 2017</a>:
+
+Users can now perform *panC* clade typing using one of two databases/typing schemes:
+
+* **BTyper's original database and 7-clade typing scheme** (implemented by default, or use command line parameter ```--panC_database legacy```; see **Optional Arguments** below for more details); this a numerical clade assigment (clade1, clade2, ..., clade7) scheme described by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2937725/"> Guinebretière, et al. 2010 </a> and implemented by all previous versions of <a href="http://aem.asm.org/content/early/2017/06/12/AEM.01096-17"> BTyper </a>. 
+
+*  **A new 18-species database and typing scheme** that includes *panC* alleles from type strains for all 18 *B. cereus* group species (use command line parameter ```--panC_database latest```; see **Optional Arguments** below for more details); to account for new clades and sub-clades spanned by the new alleles, and to avoid arbitrarily assigning new numbers to them, *panC* alleles are now labeled according to the species type strain they represent (e.g. cladeAnthracis, cladeCereus, cladeWiedmannii, cladeParanthracis, etc.).
+
+Both *panC* clade typing schemes are compatible with the latest version of BMiner.
+
+In addition, the 16S rDNA sequence database has been updated to include all 18 species type strains (see **Optional Arguments** below for more details). However, as always, interpret 16S rDNA results for the *B. cereus* group with extreme caution!
 
 ## Overview
 
@@ -281,7 +291,7 @@ BLAST algorithm to use for antimicrobial resistance gene detection. Optional arg
 Note: tblastx compares a nucleotide query sequence against a nucleotide sequence database, both of which are dynamically translated in all six reading frames. As a result, -\-amr_blast tblastx will take significantly longer than -\-amr_blast blastn (antimicrobial resistance gene detection using the ARG-ANNOT database for 9 *B. cereus* group draft assemblies (contigs) with -\-amr_blast tblastx and default thresholds takes ~24 minutes, while -\-amr_blast blastn and default thresholds takes ~30 seconds).
 
 **-panC_db/-\-panC_database [latest or legacy]**
-*panC* gene database to use for *panC* clade typing. Optional argument for use with *panC* clade typing (-\-panC True). Specify -\-panC_database latest to use the most recent *panC* database, which contains *panC* sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. Instead of outputting numerical clades (clade1, clade2, ... clade7), the new database assigns clades by species name to avoid arbitrary numbering of new clades (e.g. cladeAnthracis, cladeCereus, cladeTropicus, etc.). The original, 7-clade typing scheme using BTyper's original *panC* allele database can be specified using -\-panC_database legacy. Default is set to latest (18-species *panC* database).
+*panC* gene database to use for *panC* clade typing. Optional argument for use with *panC* clade typing (-\-panC True). Specify -\-panC_database latest to use the most recent *panC* database, which contains *panC* sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. Instead of outputting numerical clades (clade1, clade2, ... clade7), the new database assigns clades by species name to avoid arbitrary numbering of new clades (e.g. cladeAnthracis, cladeCereus, cladeTropicus, etc.). The original, 7-clade typing scheme using BTyper's original *panC* allele database is performed by default, but can be specified using -\-panC_database legacy. Default is set to legacy (7-clade *panC* database).
 
 **-s_db/-\-s_database [latest or legacy]**
 16S rDNA gene database to use for 16S rDNA typing. Optional argument for use with 16S rDNA typing (-s True). Specify -\-s_database latest to use the most recent 16S rDNA database, which contains 16S rDNA sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. The original, 9-species database can be specified using -\-s_database legacy. However, as always, **interpret any 16S rDNA typing results for the *B. cereus* group with extreme caution!** Default is set to latest (18-species 16S rDNA database). 
@@ -311,7 +321,7 @@ A tab-separated list of virulence genes detected in the genome with the respecti
 A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. The highest-scoring allele (using its blast bitscore) from its respective gene cluster is reported. Additionally, if a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
 
 * **If *panC* clade typing is being performed (-\-panC True):**
-A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
+A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7 if the legacy 7-clade typing scheme is used, or cladeAlbus, cladeAnthracis, clade Cereus, ... cladeWiedmannii if the latest 18-species typing scheme is used), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
 
 * **If MLST is being performed (-\-mlst True):**
 A tab-separated line, containing the isolate's (i) sequence type (ST), (ii) *glp* allelic type (AT), (iii) *gmk* AT, (iv) *ilv* AT, (v) *pta* AT, (vi) *pur* AT, (vii) *pyc* AT, and (viii) *tpi* AT. The best-matching allele is reported at each locus; an allele that does not match with 100\% identity or coverage is denoted by an asterisk (\*), while an allele that is not detected in the genome at the given e-value threshold is denoted by "?". If a sequence type cannot be determined using the 7 best-matching allelic types, a "?" is listed in its place. A ST that is detemined using any best-matching alleles that did not match with 100\% identity or coverage is denoted by \*, regardless of whether all 7 alleles could be associated with a ST or not.
@@ -392,7 +402,7 @@ gunzip JHQN01.1.fsa_nt.gz
 mkdir ~/Downloads/btyper_tutorial_1
 ```
 
-6. Now, let's run BTyper on our contigs, directly from our Downloads directory. Because this genome is made up of multiple contigs in multifasta format, rather than a single chromosome, we want to make sure we include the -\-draft_genome option in our command. Because we don't know much about this genome, and we want as much information as possible, let's perform all of the default typing methods with their default settings (virulence gene detection using an amino acid database, MLST, *rpoB* allelic typing, and *panC* clade typing, all using default thresholds), as well as 16S gene detection, just for fun. To run BTyper, type the following command, and press **Enter**:
+6. Now, let's run BTyper on our contigs, directly from our Downloads directory. Because this genome is made up of multiple contigs in multifasta format, rather than a single chromosome, we want to make sure we include the -\-draft_genome option in our command. Because we don't know much about this genome, and we want as much information as possible, let's perform all of the default typing methods with their default settings (virulence gene detection using an amino acid database, antimicrobial resistance gene detection using the ARG-ANNOT database, MLST, *rpoB* allelic typing, and *panC* clade typing, all using default thresholds), as well as 16S gene detection, just for fun. To run BTyper, type the following command, and press **Enter**:
 
 ```
 btyper -t seq -i ~/Downloads/JHQN01.1.fsa_nt -o ~/Downloads/btyper_tutorial_1 -s True --draft_genome
@@ -422,6 +432,9 @@ We're working with a single genome formed by multiple contigs in a single file. 
 * **Predicted Virulence Proteins**
   
 This is a list of proteins detected in our genome at 70\% coverage and 50\% identity using an amino acid sequence database (BTyper's default settings for virulence typing). Looking through the list of virulence genes, it seems that our isolate possesses a couple of *B. anthracis*-associated genes with really high similarity, including anthrax toxin genes *cya, lef,* and *pagA*!
+
+* **Predicted AMR Genes***
+This is a list of antimicrobial resistance (AMR) genes detected in our genome at 50\% coverage and 75\% identity (BTyper's default settings for AMR gene detection). It looks like we have a couple of AMR genes detected at various coverage/identity thresholds.
 
 * **Predicted *panC* Clade Designation**
 This corresponds to our isolate's *panC* clade assignment. It looks like the closest-matching *panC* sequence was that of *B. cereus* 03BB87, which belongs to *panC* Clade III, the same clade as *B. anthracis*.
