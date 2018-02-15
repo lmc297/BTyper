@@ -13,6 +13,7 @@ All noteable changes to BTyper will be documented in this file
 - Updated MLST database to reflect current PubMLST *B. cereus* database
 - Fixed typo in help message; help message displayed a default value of "50" for a minimum antimicrobial resistance gene identity value, but the default value was 75 as stated in the manual (BTyper was using a minimum identity of 75 as default, but the help message displayed 50 to the user when "btyper -h" was called)
 - Updated homebrew formula depends_on "python" line (depends_on :python is no longer used)
+- Updated README to account for new species (*panC* and 16S rDNA database changes), as well as an update to Tutorial 1 to account for the addition of AMR gene detection in BTyper v. 2.0.0
 
 ## [2.0.3] 2017-11-14
 
