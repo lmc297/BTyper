@@ -2,6 +2,18 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.1.0] 2018-02-15
+### Added
+- Added new panC database containing panC genes from 18 *B. cereus* group species type strains: 9 from the original 9 species, and 9 from proposed new species in Liu, et al. 2017 (https://www.ncbi.nlm.nih.gov/pubmed/28792367); rather than numbered clades (clade1, clade2, ...clade7), this database uses species (cladeAnthracis, cladeCereus, etc.)
+- Added new 16S rDNA database containing 16S rDNA genes from 18 *B. cereus* group species type strains: 9 from the original 9 species, and 9 from proposed new species in Liu, et al. 2017 (https://www.ncbi.nlm.nih.gov/pubmed/28792367)
+- Added -panC_db/--panC_database option to specify which panC database BTyper should use: -panC_db "latest" for the new panC database described above, or -panC_db "legacy" for the original database and 7-clade typing scheme
+- Added -s_db/--s_database option to specify which 16S rDNA database BTyper should use: -s_db "latest" for the 18-species database described above, or -s_db "legacy" for the original 9-species database
+
+### Changed
+- Updated MLST database to reflect current PubMLST *B. cereus* database
+- Fixed typo in help message; help message displayed a default value of "50" for a minimum antimicrobial resistance gene identity value, but the default value was 75 as stated in the manual (BTyper was using a minimum identity of 75 as default, but the help message displayed 50 to the user when "btyper -h" was called)
+- Updated homebrew formula to be compatible with 
+
 ## [2.0.3] 2017-11-14
 
 ### Changed
