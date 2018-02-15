@@ -109,19 +109,25 @@ Note: if you don't have permissions, you may need to use sudo:
 sudo pip install biopython
 ```
 
-4. Tap Homebrew Science, if necessary, by running the following command from your terminal:
+4. Tap Brewsci/science, if necessary, by running the following command from your terminal:
   
 ```
-brew tap homebrew/science
+brew tap brewsci/science
 ```
 
-5. Tap BTyper by running the following command from your terminal:
+5. Tap Brewsci/bio, if necessary, by running the following command from your terminal:
+
+```
+brew tap brewsci/bio
+```
+
+6. Tap BTyper by running the following command from your terminal:
   
 ```
 brew tap lmc297/homebrew-btyper
 ```
 
-6. Install BTyper and its dependencies by running the following command from your terminal:
+7. Install BTyper and its dependencies by running the following command from your terminal:
   
 ```
 brew install btyper
@@ -269,6 +275,12 @@ Minimum nucleotide query coverage for antimicrobial resistance gene detection. O
 **-\-amr_blast [blastn or tblastx]**
 BLAST algorithm to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database blastn to use nucleotide BLAST against the selected antimicrobial resistance gene database, or -\-amr_database tblastx to use a translated nucleotide database and a translated nucleotide query. Default is set to blastn (nucleotide BLAST).
 Note: tblastx compares a nucleotide query sequence against a nucleotide sequence database, both of which are dynamically translated in all six reading frames. As a result, -\-amr_blast tblastx will take significantly longer than -\-amr_blast blastn (antimicrobial resistance gene detection using the ARG-ANNOT database for 9 *B. cereus* group draft assemblies (contigs) with -\-amr_blast tblastx and default thresholds takes ~24 minutes, while -\-amr_blast blastn and default thresholds takes ~30 seconds).
+
+**-panC_db/-\-panC_database [latest or legacy]**
+*panC* gene database to use for *panC* clade typing. Optional argument for use with *panC* clade typing (-\-panC True). Specify -\-panC_database latest to use the most recent *panC* database, which contains *panC* sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. Instead of outputting numerical clades (clade1, clade2, ... clade7), the new database assigns clades by species name to avoid arbitrary numbering of new clades (e.g. cladeAnthracis, cladeCereus, cladeTropicus, etc.). The original, 7-clade typing scheme using BTyper's original *panC* allele database can be specified using -\-panC_database legacy. Default is set to latest (18-species *panC* database).
+
+**-s_db/-\-s_database [latest or legacy]**
+16S rDNA gene database to use for 16S rDNA typing. Optional argument for use with 16S rDNA typing (-s True). Specify -\-s_database latest to use the most recent 16S rDNA database, which contains 16S rDNA sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. The original, 9-species database can be specified using -\-s_database legacy. However, as always, **interpret any 16S rDNA typing results for the *B. cereus* group with extreme caution!** Default is set to latest (18-species 16S rDNA database). 
 
 <sup>*</sup>The antimicrobial resistance (AMR) gene detection method employed by BTyper is similar to the one described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/28389536">Carroll, et al.</a>; rather than using the reduced database described in the manuscript, BTyper uses the full <a href="https://www.ncbi.nlm.nih.gov/pubmed/24145532">ARG-ANNOT</a> antimicrobial resistance gene database, clustered at 80% identity using <a href="http://weizhongli-lab.org/cd-hit/">cd-hit-est</a> and selects the best-matching AMR allele from each AMR gene cluster (as was done by <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-014-0090-6">Inouye, et al.</a>).
 
