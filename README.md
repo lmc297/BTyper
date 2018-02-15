@@ -1,6 +1,10 @@
 # BTyper
 ## A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
 
+## Update to BTyper version 2.1.0: we have new species!
+
+Because <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> 9 novel <i>B. cereus</i> group species</a> have been proposed and published, BTyper version 2.1.0, released on February 15, 2018, has some changes.
+
 ## Overview
 
 BTyper is a command-line tool that employs a combination of (i) virulence gene-based typing, (ii) multi-locus sequence typing (MLST), (iii) panC clade typing, and (iv) rpoB allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data.
