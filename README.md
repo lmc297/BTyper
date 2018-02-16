@@ -123,13 +123,19 @@ Note: if you don't have permissions, you may need to use sudo:
 sudo pip install biopython
 ```
 
-4. Tap BTyper by running the following command from your terminal:
+4. Tap brewsci/science, if necessary, by running the following command from your terminal:
+
+```
+brew tap brewsci/science
+```
+
+5. Tap BTyper by running the following command from your terminal:
   
 ```
 brew tap lmc297/homebrew-btyper
 ```
 
-5. Install BTyper and its dependencies by running the following command from your terminal:
+6. Install BTyper and its dependencies by running the following command from your terminal:
   
 ```
 brew install btyper
