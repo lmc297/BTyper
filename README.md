@@ -1,5 +1,6 @@
 # BTyper
-## A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
+
+A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
 
 ## Update to BTyper version 2.1.0: 9 new *B. cereus* group species
 
