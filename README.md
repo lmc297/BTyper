@@ -2,7 +2,7 @@
 
 A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
 
-## Update to BTyper version 2.1.0: 9 new *B. cereus* group species
+## Update to BTyper version 2.1.0 and up: 9 new *B. cereus* group species
 
 We've updated BTyper version 2.1.0 (released February 15, 2018) to account for 9 *B. cereus* group species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al. 2017</a>, which we describe below. Stay tuned for more updates!
 
@@ -276,10 +276,10 @@ Comma-separated list of k-mer sizes to be used for SPAdes (all values must be od
 Note: We recommend selecting optimum k-mer size(s) for your specific data set by consulting the SPAdes documentation. Currently, SPAdes recommends using -k 21,33,55,77 for 150 bp ILLUMINA paired-end reads, and -k 21,33,55,77,99,127 for 250 bp ILLUMINA paired-end reads. 
 
 **-a/-\-amr [True or False]**
-Antimicrobial resistance gene detection. Detects antimicrobial resistance genes using the ARG-ANNOT antimicrobial resistance gene database clustered at an identity of 0.8 using cd-hit-est.<sup>*</sup> Reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True.
+Antimicrobial resistance gene detection. Detects antimicrobial resistance genes, and reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True. Note: in BTyper version 2.2.0, the -\-amr option can be used to detect plasmid replicons in nucleotide sequences using the PlasmidFinder database; see below for more information.
 
 **-amr_db/-\-amr_database [argannot or megares]**
-Antimicrobial resistance gene database to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database argannot to use the ARG-ANNOT nucleotide database (clustered at 0.8 identity using cd-hit-est, with the top-scoring allele reported from each cluster), or -\-amr_database megares to use the MEGARes nucleotide database (clustered by the MEGARes-defined Group level, with the top scoring allele reported from each cluster). Default is set to argannot (ARG-ANNOT database).
+Antimicrobial resistance (AMR) gene database to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database argannot to use the ARG-ANNOT AMR gene nucleotide database or -\-amr_database megares to use the MEGARes AMR gene nucleotide database. Default is set to argannot (ARG-ANNOT database). Note: in BTyper version 2.2.0, plasmid replicon detection can be performed using the PlasmidFinder database by specifying -\-amr_database plasmidfinder; all options that can be used with AMR gene detection (e.g. minimum percent identity and coverage thresholds, pruning method, overlap) described below can be applied to plasmid replicon detection.
 
 **-\-amr_p  [integer between 0 and 100]**
 Minimum percent nucleotide identity for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify the minimum percent nucleotide identity needed for an antimicrobial resistance gene to be considered present in a sequence. Default is set to 75.
@@ -291,7 +291,11 @@ Minimum nucleotide query coverage for antimicrobial resistance gene detection. O
 BLAST algorithm to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database blastn to use nucleotide BLAST against the selected antimicrobial resistance gene database, or -\-amr_database tblastx to use a translated nucleotide database and a translated nucleotide query. Default is set to blastn (nucleotide BLAST).
 Note: tblastx compares a nucleotide query sequence against a nucleotide sequence database, both of which are dynamically translated in all six reading frames. As a result, -\-amr_blast tblastx will take significantly longer than -\-amr_blast blastn (antimicrobial resistance gene detection using the ARG-ANNOT database for 9 *B. cereus* group draft assemblies (contigs) with -\-amr_blast tblastx and default thresholds takes ~24 minutes, while -\-amr_blast blastn and default thresholds takes ~30 seconds).
 
-<sup>*</sup>The antimicrobial resistance (AMR) gene detection method employed by BTyper is similar to the one described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/28389536">Carroll, et al.</a>; rather than using the reduced database described in the manuscript, BTyper uses the full <a href="https://www.ncbi.nlm.nih.gov/pubmed/24145532">ARG-ANNOT</a> antimicrobial resistance gene database, clustered at 80% identity using <a href="http://weizhongli-lab.org/cd-hit/">cd-hit-est</a> and selects the best-matching AMR allele from each AMR gene cluster (as was done by <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-014-0090-6">Inouye, et al.</a>).
+**-\-prune [cluster or location]**
+Pruning method to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify pruning method for final results files, which determines which alleles are reported in final results files. Specify -\-prune cluster to report top-scoring gene within a detected cluster of similar genes (obtained by clustering the appropriate database at 0.8 identity using cd-hit-est, with the top-scoring allele reported from each cluster), or -\-prune location to report the top-scoring gene for genes overlapping past some threshold (see -\-overlap below). Default is set to location. Note: BTyper versions 2.0.0 to 2.1.0 used the -\-prune cluster method; however, we have determined the -\-prune location method to be more accurate, hence its implementation as the default pruning method in BTyper version 2.2.0.
+
+**-\-overlap [float between 0 and 1]**
+Maximum proportion of overlap for overlapping antimicrobial resistance genes to be considered separate genes, rather than alleles of the same gene. Optional argument for use with antimicrobial resistance gene detection (-\-amr True) and location-based pruning method (-\-prune location). Hits overlapping above this threshold are considered to be alleles of the same gene, and the highest-scoring hit is reported in the final results file. Hits with overlap proportions below this threshold are considered separate genes, and both are reported in the final results file. Default is set to 0.7. 
 
 
 ------------------------------------------------------------------------
@@ -313,7 +317,7 @@ Final results text file, 1 per input genome. BTyper creates this final results t
 A tab-separated list of virulence genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. If a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
 
 * **If antimicrobial resistance gene detection is being performed (-\-amr True):**
-A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. The highest-scoring allele (using its blast bitscore) from its respective gene cluster is reported. Additionally, if a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score.
+A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. The highest-scoring allele (using its blast bitscore) from its respective gene cluster/location (depending on pruning method) is reported. Additionally, if a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score when -\-prune cluster is used. When -\-prune location is used, alleles of the same gene that appear in different locations in the genome (i.e. multiple copies) will be reported here. Note: in BTyper version 2.2.0, if the PlasmidFinder database is being used to detect plasmid replicons, they will be reported here in lieu of AMR genes.
 
 * **If *panC* clade typing is being performed (-\-panC True):**
 A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7 if the legacy 7-clade typing scheme is used, or cladeAlbus, cladeAnthracis, clade Cereus, ... cladeWiedmannii if the latest 18-species typing scheme is used), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
@@ -359,7 +363,7 @@ Directory in which BTyper deposits additional results files for each input genom
   
 * **Can I use partial nucleotide sequences (plasmid sequences, MLST genes, *rpoB* alleles, etc.) as input for BTyper?**
   
-Sure! You don't have to use whole-genome sequencing data as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (i.e. if you're interested in detecting virulence and antimicrobial resistance genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
+Sure! You don't have to use whole-genome sequencing data as input; you can technically use any nucleotide sequencing data and treat it as an assembly, as long as it is in fasta or multifasta format (any of the options that require assembly with SPAdes are designed for bacterial genomes). Although it's not necessary, you may want to adjust the options to only perform typing methods you're interested in to make your output easier to read (e.g. if you're interested in detecting virulence and antimicrobial resistance genes in a plasmid sequence, don't waste your time performing other typing methods; just set -\-mlst, -\-rpoB, and -\-panC to False).
 
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
@@ -501,7 +505,7 @@ cat *.fasta > bacillus.fasta
 7. Run BTyper to extract the *plcR* nucleotide sequence from each of our 3 genomes by typing the following command: 
 
 ```
-btyper -t seq -i bacillus.fasta -o . -m False -r False -p False -v_db nuc -nuc_p 0 -nuc_q 0
+btyper -t seq -i bacillus.fasta -o . -m False -r False -p False -a False -v_db nuc -nuc_p 0 -nuc_q 0
 ```
 
 Here are the options we selected, explained:
@@ -529,6 +533,9 @@ We only want to perform virulence typing, so we are setting *rpoB* allelic typin
 * **-p False**
 
 We only want to perform virulence typing, so we are setting *panC* clade typing to False
+
+* **-a False**
+We only want to perform virulence typing, so we are setting antimicrobial resistance gene detection to False.
 
 * **-v_db nuc**
 
@@ -650,6 +657,10 @@ Gupta, SK, et al. ARG-ANNOT, a new bioinformatic tool to discover antibiotic res
 Inouye, M., Harriet Dashnow, Lesley-Ann Raven, Mark B Schultz, Bernard J Pope, Takehiro Tomita, Justin Zobel and Kathryn E Holt. SRST2: Rapid genomic surveillance for public health and hospital microbiology labs. *Genome Medicine* 2014 Nov 20;6(11):90.
 
 Lakin, S.M., et al. MEGARes: an antimicrobial resistance database for high throughput sequencing. *Nucleic Acids Research* 2017 Jan 4; 45(Database issue): D574–D580.
+
+#### Plasmid Replicon Detection
+
+Carattoli, Alessandra, et al. *In Silico* Detection and Typing of Plasmids using PlasmidFinder and Plasmid Multilocus Sequence Typing. *Antimicrob Agents and Chemotherapy* 2014 Jul; 58(7): 3895–3903.
 
 
 #### Tutorial Genomes
