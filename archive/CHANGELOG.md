@@ -2,6 +2,15 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.2.0] 2018-03-21
+### Added
+- Added new default, location-based antimicrobial resistance (AMR) gene pruning method, which can take into account the position of a gene in the genoe: genes overlapping at more than some proportion threshold (default = 0.7) are treated as alleles of the same gene and only the top hit is reported. This is more accurate than the previous cluster-based method, which incorrectly reported tetracycline resistance genes at the same position in several *Salmonella* genomes as being different genes, and did not work with plasmid replicons
+- Added most-recent PlasmidFinder plasmid replicon database as an option to be used with --amr method
+
+### Changed
+- Updated MLST database to reflect current PubMLST *B. cereus* database
+- Updated README to account for location-based AMR gene detection parameters and PlasmidFinder replicon detection options; updated Tutorial 2 to account for inclusion of AMR gene detection
+
 ## [2.1.0] 2018-02-15
 ### Added
 - Added new panC database containing panC genes from 18 *B. cereus* group species type strains: 9 from the original 9 species, and 9 from proposed new species in Liu, et al. 2017 (https://www.ncbi.nlm.nih.gov/pubmed/28792367); rather than numbered clades (clade1, clade2, ...clade7), this database uses species (cladeAnthracis, cladeCereus, etc.)
