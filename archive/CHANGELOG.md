@@ -2,6 +2,11 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.2.1] 2018-04-21
+### Changed
+- Forgot to upload virulence gene nucleotide sequence database for use with -v_db nuc option in version 2.2.0; fixed this
+- Updated MLST database to reflect current PubMLST *B. cereus* database
+
 ## [2.2.0] 2018-03-21
 ### Added
 - Added new default, location-based antimicrobial resistance (AMR) gene pruning method, which can take into account the position of a gene in the genoe: genes overlapping at more than some proportion threshold (default = 0.7) are treated as alleles of the same gene and only the top hit is reported. This is more accurate than the previous cluster-based method, which incorrectly reported tetracycline resistance genes at the same position in several *Salmonella* genomes as being different genes, and did not work with plasmid replicons
