@@ -2,6 +2,13 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.2.2] 2018-05-03
+### Added
+- Added new default 7-clade *panC* database containing only type strain *panC* genes for 9 *B. cereus* group species; we have found that this correlates better with whole-genome phylogenetic clade based on the current 7-clade system than the legacy database, which includes non-type strains
+
+### Changed
+- Changed default *panC* database from "legacy" to "type"
+
 ## [2.2.1] 2018-04-21
 ### Changed
 - Forgot to upload virulence gene nucleotide sequence database for use with -v_db nuc option in version 2.2.0; fixed this
