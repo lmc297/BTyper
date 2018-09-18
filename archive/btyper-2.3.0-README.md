@@ -4,9 +4,11 @@ A computational tool for virulence-based classification of *Bacillus cereus* gro
 
 ## Overview
 
-BTyper is a command-line tool that employs a combination of (i) virulence gene-based typing, (ii) multi-locus sequence typing (MLST), (iii) panC clade typing, and (iv) rpoB allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data.
+BTyper is a command-line tool that employs a combination of *in silico* (i) virulence gene detection, (ii) multi-locus sequence typing (MLST), (iii) *panC* clade assignment, and (iv) *rpoB* allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data.
 
-Additionally, antimicrobial resistance (AMR) gene detection was added in BTyper version 2.0.0 (released 2017-06-29), a function that can be used with sequencing data from any bacterial species.
+Antimicrobial resistance (AMR) gene detection was added in BTyper version 2.0.0 (released 2017-06-29), a function that can be used with sequencing data from any bacterial species.
+
+Most recently, an average nucleotide identity blast (ANIb) option was added in BTyper version 2.3.0 (released 2018-09-18)
 
 The program, as well as the associated databases, can be downloaded from https://github.com/lmc297/BTyper.
 
@@ -160,7 +162,7 @@ Note: to ensure that BTyper works correctly, make sure database directories (beg
 python /path/to/executable/btyper [options...]
 ```
 
-Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program: ```python btyper [options...]```.
+Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program or related scripts: ```python btyper [options...]```.
 
 
 ------------------------------------------------------------------------
@@ -228,6 +230,12 @@ Minimum percent identity for nucleotide database. Optional argument for use with
 
 **-nuc_q/-\-nucleotide_q [integer between 0 and 100]**
 Minimum query coverage for nucleotide database. Optional argument for use with virulence typing using a nucleotide database (-\-virulence True -\-virulence_database nuc). Specify the minimum percent coverage needed for a virulence gene to be considered present in a sequence when using a nucleotide database. Default is set to 90.
+
+**-b/-\-anib [True or False]**
+Average nucleotide identity blast (ANIb). Performs ANIb using the algorithm described in the "Average Nucleotide Identity BLAST (ANIb)" section below, treating the input genome as the query and selected *B. cereus* group genomes as references (see -b_db/-\-anib_db option below). Reports reference genome with the highest ANIb value. Default is set to False.
+
+**-b_db/-\-anib_db [published or effective]**
+Reference genome database to use for ANIb. Optional argument for use with ANIb (-\-anib True). Specify reference genomes for ANIb calculation: published for 18 published *Bacillus cereus* group species, or effective to use the published database plus 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (39 species total). Default is set to published.
 
 **-m/-\-mlst [True or False]**
 Multilocus sequence typing (MLST). Performs MLST using nucleotide blast (blastn) and the *Bacillus cereus* MLST scheme from PubMLST. Reports highest-scoring alleles using BLAST bit score and their associated sequence type, if available. Default is set to True.
@@ -309,6 +317,9 @@ A tab-separated list of virulence genes detected in the genome with the respecti
 * **If antimicrobial resistance gene detection is being performed (-\-amr True):**
 A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. The highest-scoring allele (using its blast bitscore) from its respective gene cluster/location (depending on pruning method) is reported. Additionally, if a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score when -\-prune cluster is used. When -\-prune location is used, alleles of the same gene that appear in different locations in the genome (i.e. multiple copies) will be reported here. Note: in BTyper version 2.2.0, if the PlasmidFinder database is being used to detect plasmid replicons, they will be reported here in lieu of AMR genes.
 
+* **If average nucleotide identity BLAST (ANIb) is being performed (-\-anib True):**
+A tab-separated line, containing the *B. cereus* group species with the highest ANIb value (one of the 18 published *B. cereus* group species if the default published ANIb database is used; if the effective ANIb database is used, the closest "species" may be denoted by a RefSeq accession number rather than a species name), the ANIb value, and the percen coverage. If no tested *B. cereus* group species has an ANIb value > 95 (often regarded as a cutoff for bacterial species), a species of "Unknown" is reported, with the highest-ANIb-producing species in parentheses plus \* (e.g., "Unknown (Bacillus pseudomycoides)\*")
+
 * **If *panC* clade typing is being performed (-\-panC True):**
 A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7 if the type strain 7-clade typing scheme is used, or cladeAlbus, cladeAnthracis, clade Cereus, ... cladeWiedmannii if the latest 18-species typing scheme is used), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
 
@@ -346,6 +357,17 @@ Directory in which BTyper deposits results directories for individual genomes. B
 Directory in which BTyper deposits additional results files for each input genome. BTyper creates this directory within the isolatefiles directory (output_directory/btyper_final_results/isolatefiles/*your_genome*_results). Within this directory, you'll find detailed tab-separated results files for each typing analysis performed, as well as fasta files containing genes extracted from the genome in question. If you're interested in virulence/AMR genes present in multiple copies in a genome, the location of each gene in a genome, sequences of all virulence genes detected in a particular isolate, alleles other than the best-matching one, etc., they will be deposited here.
 
 
+If average nucleotide identity BLAST (ANIb) is being performed, an additional output directory with additional files is created:
+
+**anib_blastfiles**
+*directory*
+Directory in which BTyper deposits directories containing average nucleotide identiy BLAST (ANIb) calculation files for each input genome; most users can delete this directory, as it contains intermediate files used to calculate ANIb relative to all reference genomes. BTyper creates this directory within the btyper_final_results directory within your specified output directory (output_directory/btyper_final_results/anib_blastfiles).
+
+***your_genome***
+*directory*
+Directory in which BTyper deposits ANIb calculation files for each input genome. BTyper creates this directory within the anib_blastfiles directory (output_directory/btyper_final_results/anib_blastfiles/*your_genome*). Within this directory, you will find raw BLAST results (ends in .txt) and the hits used to calculate ANIb/coverage (ends in finalfragments.txt) for each input genome/reference genome combination; for example, if you have an input genome named mygenome.fasta, you will have a file called mygenome_vs_anthracis.txt (raw BLAST results of mygenome relative to *B. anthracis* str. Ames genome), a file called mygenome_vs_anthracis_finalfragments.txt (values used to calculate ANIb between mygenome and the *B. anthracis* str. Ames genome), mygenome_vs_cereus.txt (raw blast results of mygenome relative to *B. cereus* str. ATCC 14579 genome), a file called mygenome_vs_cereus_finalfragments.txt (values used to calculate ANIb between mygenome and *B. cereus* str. ATCC 14579 genome), and so on...)
+
+
 ------------------------------------------------------------------------
   
   
@@ -358,6 +380,14 @@ Sure! You don't have to use whole-genome sequencing data as input; you can techn
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
 Yes! You can use whole-genome sequencing data from any bacterial species as input; in fact, BTyper's *rpoB* allelic type database provided by Cornell's Food Safety Lab actually contains allelic types for non-*Bacillus* species. Additionally, we've implemented antimicrobial resistance (AMR) gene detection using the ARG-ANNOT database in version 2.0.0 of BTyper, which may be used with any bacterial species. However, your results from certain typing analyses (i.e. MLST using the *B. cereus* group typing scheme) may be completely meaningless. Be extra cautious when interpreting them, and always take identity and coverage values for detected genes into consideration.
+
+
+------------------------------------------------------------------------
+
+
+## Average Nucleotide Identity BLAST (ANIb)
+
+
 
 
 ------------------------------------------------------------------------
