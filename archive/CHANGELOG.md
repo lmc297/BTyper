@@ -8,7 +8,7 @@ All noteable changes to BTyper will be documented in this file
 - seq_anib_db directory, which contains a list of genomes of 18 pubished *B. cereus* group species (published.txt), a list of genomes of 21 effective *B. cereus* group species (effective.txt; also lists two genomes that were thought to be potential putative new species but were recently removed from/not included in RefSeq due to small assembly size, which are denoted by a #), and empty published and effective directories for storing genomes to be used with the -\-anib option
 - build_btyper_anib_db.py script, which downloads published and/or effective *B. cereus* group genomes listed in the published.txt and/or effective.txt files to be used with -\-anib option
 - btyper2matrix.py script, which can be used to aggregate BTyper final results files into a single matrix/text file
-- Added sph (sphingomyelinase C [Bacillus anthracis str. Ames]) gene to virulence gene databases
+- Added *sph* (sphingomyelinase C [Bacillus anthracis str. Ames]) gene to virulence gene databases
 
 ### Changed
 - Updated ARG-ANNOT AMR database to most recent database (ARG-ANNOT version 4/May 2018)
