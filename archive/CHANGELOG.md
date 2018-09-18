@@ -2,6 +2,19 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.3.0] 2018-09-18
+### Added
+- Average nucleotide identity blast (ANIb) function (-\-anib/-b; set to False by default)
+- seq_anib_db directory, which contains a list of genomes of 18 pubished *B. cereus* group species (published.txt), a list of genomes of 21 effective *B. cereus* group species (effective.txt; also lists two genomes that were thought to be potential putative new species but were recently removed from/not included in RefSeq due to small assembly size, which are denoted by a #), and empty published and effective directories for storing genomes to be used with the -\-anib option
+- build_btyper_anib_db.py script, which downloads published and/or effective *B. cereus* group genomes listed in the published.txt and/or effective.txt files to be used with -\-anib option
+- btyper2matrix.py script, which can be used to aggregate BTyper final results files into a single matrix/text file
+- Added sph (sphingomyelinase C [Bacillus anthracis str. Ames]) gene to virulence gene databases
+
+### Changed
+- Updated ARG-ANNOT AMR database to most recent database (ARG-ANNOT version 4/May 2018)
+- Updated MLST database to reflect current PubMLST *B. cereus* database (1795 STs)
+- Updated README to reflect addition of ANIb and btyper2matrix.py
+
 ## [2.2.2] 2018-05-03
 ### Added
 - Added new default 7-clade *panC* database containing only type strain *panC* genes for 9 *B. cereus* group species; we have found that this correlates better with whole-genome phylogenetic clade based on the current 7-clade system than the legacy database, which includes non-type strains
