@@ -415,13 +415,13 @@ Directory in which BTyper deposits ANIb calculation files for each input genome.
 
 ### btyper2matrix.py
 
-* Purpose: aggregates multiple BTyper file results files and produce a single matrix/text file (easier to read/interpret for users with more than one genome, easier to parse)
+* **Purpose:** aggregates multiple BTyper file results files and produce a single matrix/text file (easier to read/interpret for users with more than one genome, easier to parse)
 
-* Input: path to directory containing btyper final results files; these files have the suffix '_final_results.txt' and should be in a directory called 'btyper_final_results', provided the directory was not renamed
+* **Input:** path to directory containing btyper final results files; these files have the suffix '_final_results.txt' and should be in a directory called 'btyper_final_results', provided the directory was not renamed
 
-* Output: matrix file called "btyper2matrix_output.txt", deposited in an output directory of your choice; matrix is tab-separated and contains 1 row per final results file (genome). Includes a column for each virulence gene detected (denoted in column header by "vir|gene_name", with 1 for present in a genome and 0 for absent in a genome), a column for each AMR gene detected (denoted in column header by "amr|gene_name", with 1 for present in a genome and 0 for absent in a genome), and one column each for ANI species, *panC* clade, MLST sequence type, *rpoB* allelic type, and 16S rDNA species; cells with "NA" correspond to the absence of results for a particular analysis.
+* **Output:** matrix file called "btyper2matrix_output.txt", deposited in an output directory of your choice; matrix is tab-separated and contains 1 row per final results file (genome). Includes a column for each virulence gene detected (denoted in column header by "vir|gene_name", with 1 for present in a genome and 0 for absent in a genome), a column for each AMR gene detected (denoted in column header by "amr|gene_name", with 1 for present in a genome and 0 for absent in a genome), and one column each for ANI species, *panC* clade, MLST sequence type, *rpoB* allelic type, and 16S rDNA species; cells with "NA" correspond to the absence of results for a particular analysis.
 
-* Command structure:
+* **Command structure:**
 ```
 btyper2matrix.py -i </path/to/directory/btyper_final_results/> -o </path/to/output/directory/>
 ```
@@ -429,13 +429,13 @@ For help, type ```btyper2matrix.py -h``` or ```btyper2matrix.py --help```
 
 ### build_btyper_anib_db.py
 
-* Purpose: download databases(s) to be used with BTyper's ANIb option (-\-anib True); must be run before running ANIb
+* **Purpose:** download databases(s) to be used with BTyper's ANIb option (-\-anib True); must be run before running ANIb
 
-* Input: published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 118M database with 18 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 23 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (41 species total; for most users' purposes, the published database is recommended)
+* **Input:** published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 118M database with 18 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 23 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (41 species total; for most users' purposes, the published database is recommended)
 
-* Output: 18 genomes stored in BTyper's seq_anib_db/published/ directory (published) or 18 genomes stored in BTyper's seq_anib_db/published/ directory, plus 21 genomes stored in BTyper's seq_anib_db/effective/ directory (effective)
+* **Output:** 18 genomes stored in BTyper's seq_anib_db/published/ directory (published) or 18 genomes stored in BTyper's seq_anib_db/published/ directory, plus 21 genomes stored in BTyper's seq_anib_db/effective/ directory (effective)
 
-* Command structure:
+* **Command structure:**
 ```
 build_btyper_anib_db.py -db [published or effective]
 ```
