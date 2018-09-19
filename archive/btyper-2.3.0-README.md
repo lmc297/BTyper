@@ -513,11 +513,15 @@ NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_
     
     e. If this meets cutoff thresholds AND is the top hit for that particular fragment, store it and print it to a final fragments file:
     
+    ```
+    
     if float(frag_anipid) > float(30) and float(frag_anicoverage) > float(70) and fragment not in used_frags:
     
         # store fragments and print the following tab-separated line to the final fragments file:
         
         query_fragment  float(hit.pident) float(hit.qlen) float(hit.bits) float(hit.length) float(hit.gaps)
+        
+    ```
 
 4. For each final fragments file (i.e. reference genome):
 
