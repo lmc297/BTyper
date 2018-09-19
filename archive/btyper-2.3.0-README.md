@@ -398,7 +398,7 @@ Directory in which BTyper deposits results directories for individual genomes. B
 Directory in which BTyper deposits additional results files for each input genome. BTyper creates this directory within the isolatefiles directory (output_directory/btyper_final_results/isolatefiles/*your_genome*_results). Within this directory, you'll find detailed tab-separated results files for each typing analysis performed, as well as fasta files containing genes extracted from the genome in question. If you're interested in virulence/AMR genes present in multiple copies in a genome, the location of each gene in a genome, sequences of all virulence genes detected in a particular isolate, alleles other than the best-matching one, etc., they will be deposited here.
 
 
-If average nucleotide identity BLAST (ANIb) is being performed, an additional output directory with additional files is created:
+**If average nucleotide identity BLAST (ANIb) is being performed, an additional output directory with additional files is created:**
 
 **anib_blastfiles**
 *directory*
