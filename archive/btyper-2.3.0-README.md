@@ -81,6 +81,12 @@ btyper -t sra -i illumina_reads.sra -o /path/to/output_directory
 btyper -t sra-get -i SRAXXXXXXX -o /path/to/output_directory
 ```
 
+**Aggregate multiple BTyper final results files into one matrix/text file:
+
+```
+btyper2matrix.py -i </path/to/directory/btyper_final_results/> -o </path/to/desired/output/directory/>
+```
+
 ------------------------------------------------------------------------
   
   
@@ -130,6 +136,22 @@ brew tap lmc297/homebrew-btyper
 brew install btyper
 ```
 
+7. Optional: in BTyper version 2.3.0 (released 18-09-18), ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
+
+For published database (recommended; needs about 118M disk space):
+
+```
+build_btyper_anib_db.py -db published
+```
+
+For effective database (not recommended; needs about 237M disk space):
+```
+build_btyper_anib_db.py -db effective
+```
+
+After running either command, follow the instructions in your terminal.
+
+
 ### Download and run BTyper using source file (macOS and Ubuntu)
 
 1. To run BTyper, please download and install the following dependencies, if necessary:
@@ -161,6 +183,23 @@ Note: to ensure that BTyper works correctly, make sure database directories (beg
 ```
 python /path/to/executable/btyper [options...]
 ```
+
+Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program or related scripts: ```python btyper [options...]```.
+
+5. Optional: in BTyper version 2.3.0 (released 18-09-18), ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
+
+For published database (recommended; needs about 118M disk space):
+
+```
+python /path/to/executable/build_btyper_anib_db.py -db published
+```
+
+For effective database (not recommended; needs about 237M disk space):
+```
+python /path/to/executable/build_btyper_anib_db.py -db effective
+```
+
+After running either command, follow the instructions in your terminal.
 
 Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program or related scripts: ```python btyper [options...]```.
 
@@ -232,10 +271,12 @@ Minimum percent identity for nucleotide database. Optional argument for use with
 Minimum query coverage for nucleotide database. Optional argument for use with virulence typing using a nucleotide database (-\-virulence True -\-virulence_database nuc). Specify the minimum percent coverage needed for a virulence gene to be considered present in a sequence when using a nucleotide database. Default is set to 90.
 
 **-b/-\-anib [True or False]**
-Average nucleotide identity blast (ANIb). Performs ANIb using the algorithm described in the "Average Nucleotide Identity BLAST (ANIb)" section below, treating the input genome as the query and selected *B. cereus* group genomes as references (see -b_db/-\-anib_db option below). Reports reference genome with the highest ANIb value. Default is set to False.
+Average nucleotide identity blast (ANIb). Performs ANIb using the algorithm described in the "Average Nucleotide Identity BLAST (ANIb) Q&A" section below, treating the input genome as the query and selected *B. cereus* group genomes as references (see -b_db/-\-anib_db option below). Reports reference genome with the highest ANIb value. Default is set to False.
+Note: ANIb is a good method for predicting bacterial species. However, running ANIb (-\-anib True) will significantly increase your analysis time. For example: a single *B. cereus* group draft genome (-\-draft_genome) takes under 10 seconds to analyze using BTyper's default settings; using -\-anib True (with the default published genome database), it takes about 1 minute.
 
 **-b_db/-\-anib_db [published or effective]**
 Reference genome database to use for ANIb. Optional argument for use with ANIb (-\-anib True). Specify reference genomes for ANIb calculation: published for 18 published *Bacillus cereus* group species, or effective to use the published database plus 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (39 species total). Default is set to published.
+Note: Running ANIb with the effective species genome database (-\-anib_db effective) will significantly increase your analysis time. For example: a single *B. cereus* group draft genome (-\-draft_genome) takes about 1 minute to run using the published (default) genome database; using -\-anib_db effective, it takes about 2 minutes.
 
 **-m/-\-mlst [True or False]**
 Multilocus sequence typing (MLST). Performs MLST using nucleotide blast (blastn) and the *Bacillus cereus* MLST scheme from PubMLST. Reports highest-scoring alleles using BLAST bit score and their associated sequence type, if available. Default is set to True.
@@ -369,6 +410,135 @@ Directory in which BTyper deposits ANIb calculation files for each input genome.
 
 
 ------------------------------------------------------------------------
+
+## Additional BTyper Scripts (BTyper version 2.3.0 and up)
+
+### btyper2matrix.py
+
+* Purpose: aggregates multiple BTyper file results files and produce a single matrix/text file (easier to read/interpret for users with more than one genome, easier to parse)
+
+* Input: path to directory containing btyper final results files; these files have the suffix '_final_results.txt' and should be in a directory called 'btyper_final_results', provided the directory was not renamed
+
+* Output: matrix file called "btyper2matrix_output.txt", deposited in an output directory of your choice; matrix is tab-separated and contains 1 row per final results file (genome). Includes a column for each virulence gene detected (denoted in column header by "vir|gene_name", with 1 for present in a genome and 0 for absent in a genome), a column for each AMR gene detected (denoted in column header by "amr|gene_name", with 1 for present in a genome and 0 for absent in a genome), and one column each for ANI species, *panC* clade, MLST sequence type, *rpoB* allelic type, and 16S rDNA species; cells with "NA" correspond to the absence of results for a particular analysis.
+
+* Command structure:
+```
+btyper2matrix.py -i </path/to/directory/btyper_final_results/> -o </path/to/output/directory/>
+```
+For help, type ```btyper2matrix.py -h``` or ```btyper2matrix.py --help```
+
+### build_btyper_anib_db.py
+
+* Purpose: download databases(s) to be used with BTyper's ANIb option (-\-anib True); must be run before running ANIb
+
+* Input: published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 118M database with 18 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 23 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (41 species total; for most users' purposes, the published database is recommended)
+
+* Output: 18 genomes stored in BTyper's seq_anib_db/published/ directory (published) or 18 genomes stored in BTyper's seq_anib_db/published/ directory, plus 21 genomes stored in BTyper's seq_anib_db/effective/ directory (effective)
+
+* Command structure:
+```
+build_btyper_anib_db.py -db [published or effective]
+```
+Users will then be prompted in the terminal to type "yes" and press ENTER to confirm the download.
+
+For help, type ```build_btyper_anib_db.py -h``` or ```build_btyper_anib_db.py --help```
+
+------------------------------------------------------------------------
+
+## Average Nucleotide Identity BLAST (ANIb) Q&A
+
+### What is ANI?
+
+Average nucleotide identity, or ANI, is a metric that can be used to <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC549018/">assign a bacterial genome to a bacterial species</a>. Very briefly, it is performed by fragmenting the bacterial genome in question (e.g., into fragments of a specific length, into coding regions), aligning those fragments against a reference genome (e.g., using BLAST, MUMmer), and then taking the average percentage of identical base pair matches of the aligned regions. 
+
+In the past, DNA–DNA hybridization (DDH) has been used to delineate prokaryotic species, with memebers of a species <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2776425/">generally sharing DDH values of greater than 70% similarity</a>. ANI is a rapid and scalable *in silico* method that has been shown to correlate with DDH values, so it can be used to evaluate whether two genomes belong to the same species or different species. Currently, a <a href="https://www.ncbi.nlm.nih.gov/pubmed/17220447">species cutoff of 95 ANI is typically used for assigning bacterial species</a> (i.e., 2 genomes belong to the same species if they share &#8805; 95 ANI and different species if they share < 95 ANI), although a range of cutoffs have been proposed (e.g., 94 ANI, proposed by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC549018/">Konstantinidis and Tiedje in 2005</a>, 95-96 ANI, proposed by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC549018/">Richter and Rosselló-Móra (2009)</a> and later supported by <"<a href="https://www.ncbi.nlm.nih.gov/pubmed/24505072">Kim, et al. (2014)</a>). However, <a href="https://www.biorxiv.org/content/early/2017/11/27/225342">recent findings by Jain, et al. (2017) suggest that a species cutoff of 95 is adequate for most bacterial species</a>.
+
+### Why use ANI?
+
+Assuming you have a good quality genome assembly, ANI-based approaches should be able to tell you the species to which your *B. cereus* group genome belongs. While locus-based typing approaches (e.g. *panC*) are extremely valuable for *B. cereus* group isolate characterization, they can be incongruent with whole-genome phylogenetic clade. Also, if you went through the trouble of sequencing an entire *B. cereus* group genome, why throw away data by looking at just a few loci when you can use the WHOLE genome?
+
+### Can I use BTyper to calculate ANI?
+
+As of BTyper version 2.3.0, you can! Just add -\-anib True to your command (by default, BTyper is set to -\-anib False). You can compare your input genome(s) to:
+
+* A database consisting of genomes of 18 published *Bacillus cereus* group species (referred to as the "published" database)
+
+* The published database plus a database consisting of 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (referred to as the "effective" database; 39 species total).
+
+### Which ANIb genome database should I use?
+
+**In nearly all cases, users should use the published genome database (used by default).** This database contains the genomes of all 18 published *B. cereus* group species and is the most accurate representation of our current knowledge of the *B. cereus* group, making it much easier to interpret the results. Furthermore, the published database takes up about half the space of the effective genome database (about 118M, compared to 237M for the effective database) and is much more stable (i.e., it takes a long time to publish a new *B. cereus* group species, so genome additions/removals to/from this database are rare).
+
+A situation in which a user might select the effective species database over the published one is if she/he/they had a genome that was thought to belong to a novel species, and she/he/they wanted to compare the genome to putative novel species proposed in the literature to see if the species has been proposed before.
+
+### If ANI is so great for determining bacterial species, why doesn't BTyper use it by default?
+
+The goal of BTyper is to serve as a **rapid, high-throughput** tool for characterizing *Bacillus cereus* group species *in silico*, and running ANIb on a single draft *B. cereus* group genome using all other default settings increases the analysis time from about 9 seconds to about 1 minute (using the default published ANIb database; using the effective ANIb database, this increases the analysis time to about 2 minutes). For users that don't mind waiting a minute for their results, we recommend using ANIb, as it really is the best way to assign a *B. cereus* group genome to a *B. cereus* group species. However, for some users, this increase may not be trivial. Furthermore, the published and effective ANIb databases take up about 118M and 237M of disk space, respectively, and some users may not have that much to spare. As a result, we have elected to not include it as a default analysis method at this time.
+
+### How does BTyper calculate ANI?
+
+BTyper uses BLAST to calculate ANI; hence, the name ANIb. Because different tools calculate ANI differently (and because we love transparency), the ANIb algorithm implemented in BTyper can be outlined as follows:
+
+0. If -\-draft_genome option is used, concatenate contigs/scaffolds into a single pseudochromosome with a spacer sequence of "NNnnNNnnNNnnNNnn" inserted in between each contig/scaffold (this is done so that the ANIb method is compatible with the other typing methods implemented in BTyper).
+
+1. Fragment the input genome into 1020 bp fragments (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/17220447">Goris, et al. 2007)</a>).
+
+2. BLAST the fragments against each of the reference genomes (18 reference genomes if using the default published database, 39 reference genomes if using the effective database), using the following command structure:
+
+```
+NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_vs_reference.txt, xdrop_gap_final = 150, evalue = 1e-15, max_target_seqs = 1, dust = "no", outfmt = '"6 qseqid sseqid pident length mismatch gaps qstart qend sstart send evalue bitscore qlen"')
+```
+
+3. For each hit in the BLAST outfmt 6 output file, do the following:
+
+    a. Calculate a fragment alignment length by subtracting the number of gaps from the alignment length:
+    
+    frag_alnlen = float(hit.length) - float(hit.gaps)
+    
+    b. Substract number of mismatches from the fragment alignment length:
+    
+    frag_alnids = float(frag_alnlen) - float(hit.mismatch)
+    
+    c. Calculate the fragment coverage by taking the fragment alignment length and dividing by the query length:
+    
+    frag_anicoverage = (float(frag_alnlen) / float(hit.qlen)) * float(100)
+    
+    d. Calculate percent nucleotide identity by dividing the number of identical bases by the query length:
+    
+    frag_anipid = (float(frag_alnids) / float(hit.qlen) * float(100)
+    
+    e. If this meets cutoff thresholds AND is the top hit for that particular fragment, store it and print it to a final fragments file:
+    
+    if float(frag_anipid) > float(30) and float(frag_anicoverage) > float(70) and fragment not in used_frags:
+        # store fragments and print the following tab-separated line to the final fragments file:
+        query_fragment  float(hit.pident) float(hit.qlen) float(hit.bits) float(hit.length) float(hit.gaps)
+
+4. For each final fragments file (i.e. reference genome):
+
+     a. Sum up the hit.length column of the final fragments file and divide by the input genome length to get the ANIb coverage
+     
+     b. Sum up the hit.pident column of the final fragements file and divide by the number of final fragments (filtered BLAST hits) to get the ANIb value for that input genome/reference genome combination
+     
+5. Report the reference genome that yields the highest ANIb value for that particular query genome (print to BTyper final results file for that particular query genome)
+
+### I ran BTyper's ANIb method, and my genome was assigned to species "Unknown"; have I discovered a new *B. cereus* group species?
+
+A species assingment of "Unknown" only means that your genome did not share at least 95 ANIb with any *B. cereus* group species in the selected ANIb database (published or effective). How you interpret this requires some thought. Some possible next steps might be:
+
+* Check the quality of your assembly (genome size, coverage, number of contigs, N50, contamination, etc.); a poor-quality assembly can produce artificially low ANIb values
+
+* Check the 16S rDNA gene (-s True) to make sure that your isolate is a member of the *B. cereus* group, i.e. shares at least 97% identity with a member of the *B. cereus* group
+
+* Try using a different tool to calculate ANIb, particularly one that will calculate pairwise ANIb between your genome and a reference genome (to increase speed, BTyper only calculates ANIb in one direction, with the input genome as the query and each database genome as a reference); different tools can produce slightly different ANIb results (e.g. 94.8 ANIb with Tool 1 vs. 95.2 ANI with Tool 2), and BTyper uses 95 ANIb as a hard cutoff for classifying a genome as an "Unknown" species. Try using <a href="http://jspecies.ribohost.com/jspeciesws/">JSpeciesWS</a> and/or <a href="https://github.com/widdowquinn/pyani">pyani</a> to perform pairwise ANIb calculations for your genome relative to *B. cereus* group species type strains. Do all tools produce ANIb values < 95? < 94? Do all tools report adequate coverage values?
+
+* Compare your genome to the genomes of known *B. cereus* group species using the <a href="https://ggdc.dsmz.de/">Genome-to-Genome Distance Calculator (GGDC)</a> to obtain *in silico* DDH values; is this value below 70? What is the probability that it is > 70?
+
+* Check your *panC*, *rpoB*, and MLST results; can your isolate be assigned to a known MLST sequence type? A known *panC* clade? If not, do all of the loci match known *B. cereus* group loci with high identity and coverage? Try constructing a phylogeny using the extracted *panC*, *rpoB*, and MLST loci of your isolate and the *panC*, *rpoB*, and MLST loci of *B. cereus* group type strains; does your isolate cluster among the *B. cereus* group type strains?
+
+* Try running ANIb using BTyper again, this time with the effective ANIb database (-b_db effective); does your isolate share > 95 ANI with a predicted, putative *B. cereus* group species that has been reported in the literature before?
+
+
+------------------------------------------------------------------------
   
   
 ## Frequently Asked Questions
@@ -380,14 +550,6 @@ Sure! You don't have to use whole-genome sequencing data as input; you can techn
 * **Can I use whole-genome sequencing data from organisms that don't belong to the *Bacillus cereus* group?**
   
 Yes! You can use whole-genome sequencing data from any bacterial species as input; in fact, BTyper's *rpoB* allelic type database provided by Cornell's Food Safety Lab actually contains allelic types for non-*Bacillus* species. Additionally, we've implemented antimicrobial resistance (AMR) gene detection using the ARG-ANNOT database in version 2.0.0 of BTyper, which may be used with any bacterial species. However, your results from certain typing analyses (i.e. MLST using the *B. cereus* group typing scheme) may be completely meaningless. Be extra cautious when interpreting them, and always take identity and coverage values for detected genes into consideration.
-
-
-------------------------------------------------------------------------
-
-
-## Average Nucleotide Identity BLAST (ANIb)
-
-
 
 
 ------------------------------------------------------------------------
@@ -665,6 +827,24 @@ Kovac, Jasna, et al. Production of hemolysin BL by *Bacillus cereus* group isola
 PubMLST *Bacillus cereus* MLST database (https://pubmlst.org/bcereus/), based on Jolley, Keith A. and Martin CJ Maiden. BIGSdb: Scalable analysis of bacterial genome variation at the population level. *BMC Bioinformatics* 2010 11:595.
 
 Rossi-Tamisier, M., et al. Cautionary tale of using 16S rRNA gene sequence similarity values in identification of human-associated bacterial species. *International Journal of Systematic and Evolutionary Microbiology* (2015), 65, 1929–1934.
+
+#### ANI/DDH Methods
+
+Goris, Johan, et al. DNA–DNA hybridization values and their relationship to whole-genome sequence similarities. *International Journal of Systematic and Evolutionary Microbiology* 2007 Jan;57(Pt 1):81-91.
+
+Jain, Chirag, et al. High-throughput ANI Analysis of 90K Prokaryotic Genomes Reveals Clear Species Boundaries. bioRxiv 225342; doi: https://doi.org/10.1101/225342.
+
+Kim, Mincheol, et al. Towards a taxonomic coherence between average nucleotide identity and 16S rRNA gene sequence similarity for species demarcation of prokaryotes. *International Journal of Systematic and Evolutionary Microbiology* 2014 Feb;64(Pt 2):346-51.
+
+Konstantinidis, Konstantinos T., and James M. Tiedje. Genomic insights that advance the species definition for prokaryotes. *Proceedings of the National Academy of Sciences of the United States of America* 2005 102(7): 2567–2572.
+
+Meier-Kolthoff, J.P., et al. Genome sequence-based species delimitation with confidence intervals and improved distance functions. *BMC Bioinformatics* 2013 14:60. 
+
+Pritchard, Leighton, et al. Genomics and taxonomy in diagnostics for food security: soft-rotting enterobacterial plant pathogens. *Analytical Methods* 2016 8(1): 12-24.
+
+Richter, Michael and Ramon Rosselló-Móra. Shifting the genomic gold standard for the prokaryotic species definition. *Proceedings of the National Academy of Sciences of the United States of America* 2009 106(45): 19126–19131.
+
+Richter, Michael, et al. JSpeciesWS: a web server for prokaryotic species circumscription based on pairwise genome comparison. *Bioinformatics* 2015 Nov 16. pii: btv681.
 
 #### Antimicrobial Resistance (AMR) Gene Detection
 
