@@ -455,11 +455,15 @@ In the past, DNA–DNA hybridization (DDH) has been used to delineate prokaryoti
 
 ### Why use ANI?
 
-Assuming you have a good quality genome assembly, ANI-based approaches should be able to tell you the species to which your *B. cereus* group genome belongs. While locus-based typing approaches (e.g. *panC*) are extremely valuable for *B. cereus* group isolate characterization, they can be incongruent with whole-genome phylogenetic clade. Also, if you went through the trouble of sequencing an entire *B. cereus* group genome, why not use the whole genome? The *Bacillus cereus* group is complex, and *Bacillus cereus* group genome classification requires a holistic approach that incorporates ANI-based species classification, locus-based classification, and virulence gene detection. 
+Assuming you have a good quality genome assembly, ANI-based approaches should be able to tell you the species to which your *B. cereus* group genome belongs. While locus-based typing approaches (e.g. *panC*) are extremely valuable for *B. cereus* group isolate characterization, they can be incongruent with whole-genome phylogenetic clade. Also, if you went through the trouble of sequencing an entire *B. cereus* group genome, why not use the whole genome?
+
+### Is ANI meant to replace other typing methods?
+
+**No.** ANI is just one piece of the puzzle. The *Bacillus cereus* group is complex, and *Bacillus cereus* group genome classification requires a holistic approach that incorporates ANI-based species classification, locus-based classification, and virulence gene detection.
 
 ### Can I use BTyper to calculate ANI?
 
-As of BTyper version 2.3.0, you can! Just add -\-anib True to your command (by default, BTyper is set to -\-anib False). You can compare your input genome(s) to:
+As of BTyper version 2.3.0, you can! Just add -\-anib True to your command (by default, this is set to -\-anib False). You can compare your input genome(s) to:
 
 * A database consisting of genomes of 18 published *Bacillus cereus* group species (referred to as the "published" database)
 
