@@ -415,7 +415,7 @@ Directory in which BTyper deposits ANIb calculation files for each input genome.
 
 ### btyper2matrix.py
 
-* **Purpose:** aggregates multiple BTyper file results files and produce a single matrix/text file (easier to read/interpret for users with more than one genome, easier to parse)
+* **Purpose:** aggregates multiple BTyper final results files and produce a single matrix/text file (easier to read/interpret for users with more than one genome, easier to parse)
 
 * **Input:** path to directory containing btyper final results files; these files have the suffix '_final_results.txt' and should be in a directory called 'btyper_final_results', provided the directory was not renamed
 
