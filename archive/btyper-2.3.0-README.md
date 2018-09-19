@@ -81,7 +81,7 @@ btyper -t sra -i illumina_reads.sra -o /path/to/output_directory
 btyper -t sra-get -i SRAXXXXXXX -o /path/to/output_directory
 ```
 
-**Aggregate multiple BTyper final results files into one matrix/text file:
+**Aggregate multiple BTyper final results files into one matrix/text file:**
 
 ```
 btyper2matrix.py -i </path/to/directory/btyper_final_results/> -o </path/to/desired/output/directory/>
