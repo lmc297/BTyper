@@ -485,7 +485,7 @@ BTyper uses BLAST to calculate ANI; hence, the name ANIb. Because different tool
 
 0. If -\-draft_genome option is used, concatenate contigs/scaffolds into a single pseudochromosome with a spacer sequence of "NNnnNNnnNNnnNNnn" inserted in between each contig/scaffold (this is done so that the ANIb method is compatible with the other typing methods implemented in BTyper).
 
-1. Fragment the input genome into 1020 bp fragments (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/17220447">Goris, et al. 2007)</a>).
+1. Fragment the input genome into 1020 bp fragments (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/17220447">Goris, et al. 2007</a>).
 
 2. BLAST the fragments against each of the reference genomes (18 reference genomes if using the default published database, 39 reference genomes if using the effective database), using the following command structure:
 
