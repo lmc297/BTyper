@@ -509,7 +509,7 @@ NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_
     
     d. Calculate percent nucleotide identity by dividing the number of identical bases by the query length:
     
-    frag_anipid = (float(frag_alnids) / float(hit.qlen) * float(100)
+    frag_anipid = (float(frag_alnids) / float(hit.qlen)) * float(100)
     
     e. If this meets cutoff thresholds AND is the top hit for that particular fragment, store it and print it to a final fragments file:
     
