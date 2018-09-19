@@ -455,7 +455,7 @@ In the past, DNA–DNA hybridization (DDH) has been used to delineate prokaryoti
 
 ### Why use ANI?
 
-Assuming you have a good quality genome assembly, ANI-based approaches should be able to tell you the species to which your *B. cereus* group genome belongs. While locus-based typing approaches (e.g. *panC*) are extremely valuable for *B. cereus* group isolate characterization, they can be incongruent with whole-genome phylogenetic clade. Also, if you went through the trouble of sequencing an entire *B. cereus* group genome, why throw away data by looking at just a few loci when you can use the WHOLE genome?
+Assuming you have a good quality genome assembly, ANI-based approaches should be able to tell you the species to which your *B. cereus* group genome belongs. While locus-based typing approaches (e.g. *panC*) are extremely valuable for *B. cereus* group isolate characterization, they can be incongruent with whole-genome phylogenetic clade. Also, if you went through the trouble of sequencing an entire *B. cereus* group genome, why not use the whole genome?
 
 ### Can I use BTyper to calculate ANI?
 
