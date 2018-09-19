@@ -431,7 +431,7 @@ For help, type ```btyper2matrix.py -h``` or ```btyper2matrix.py --help```
 
 * **Purpose:** download database(s) to be used with BTyper's ANIb option (-\-anib True); must be run before running ANIb
 
-* **Input:** published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 118M database with 18 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 23 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (41 species total; for most users' purposes, the published database is recommended)
+* **Input:** published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 118M database with 18 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 21 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (39 species total; for most users' purposes, the published database is recommended)
 
 * **Output:** 18 genomes stored in BTyper's seq_anib_db/published/ directory (published) or 18 genomes stored in BTyper's seq_anib_db/published/ directory, plus 21 genomes stored in BTyper's seq_anib_db/effective/ directory (effective)
 
