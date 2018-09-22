@@ -16,6 +16,11 @@ Post issues at https://github.com/lmc297/BTyper/issues
 
 BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be downloaded from https://github.com/lmc297/BTyper/raw/master/archive/sample_data/ncbi_btyper_final_results.zip.
 
+### New to BTyper version 2.3.0 (released 2018-09-18)
+
+* Average nucleotide identity BLAST (ANIb) typing option; see below for details
+
+* **btyper2matrix.py**, which can be used to aggregate multiple BTyper final results files into a single matrix/text file (see below)
 
 ### Citation
 
