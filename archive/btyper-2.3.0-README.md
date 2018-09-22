@@ -459,7 +459,7 @@ Assuming you have a good quality genome assembly, ANI-based approaches should be
 
 ### Is ANI meant to replace other typing methods?
 
-**No.** ANI is just one piece of the puzzle. The *Bacillus cereus* group is complex, and *Bacillus cereus* group genome classification requires a holistic approach that incorporates ANI-based species classification, locus-based classification, and virulence gene detection.
+**No.** ANI is just one piece of the puzzle. The *Bacillus cereus* group is complex, and *Bacillus cereus* group genome classification benefits from a holistic approach that incorporates ANI-based species classification, locus-based classification, and virulence gene detection.
 
 ### Can I use BTyper to calculate ANI?
 
