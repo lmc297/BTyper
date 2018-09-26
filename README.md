@@ -497,6 +497,7 @@ BTyper uses BLAST to calculate ANI; hence, the name ANIb. Because different tool
 ```
 NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_vs_reference.txt, xdrop_gap_final = 150, evalue = 1e-15, dust = "no", outfmt = '"6 qseqid sseqid pident length mismatch gaps qstart qend sstart send evalue bitscore qlen"')
 ```
+Note: BTyper version 2.3.0 included "max_target_seqs = 1" in the above blastn command to mimic the command used by many other ANIb calculators. This was removed in BTyper version 2.3.1.
 
 3. For each hit in the BLAST outfmt 6 output file, do the following:
 
