@@ -16,7 +16,7 @@ Post issues at https://github.com/lmc297/BTyper/issues
 
 BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be downloaded from https://github.com/lmc297/BTyper/raw/master/archive/sample_data/ncbi_btyper_final_results.zip.
 
-### New to BTyper version 2.3.0 (released 2018-09-18)
+### New to BTyper version 2.3.0 (released 2018-09-18) and up
 
 * Average nucleotide identity BLAST (ANIb) typing option; see below for details
 
@@ -141,7 +141,7 @@ brew tap lmc297/homebrew-btyper
 brew install btyper
 ```
 
-7. Optional: in BTyper version 2.3.0 (released 18-09-18), ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
+7. Optional: in BTyper version 2.3.0 (released 18-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
 
 For published database (recommended; needs about 118M disk space):
 
@@ -173,12 +173,12 @@ After running either command, follow the instructions in your terminal.
   
   2. Download the BTyper's source file, and store it in your directory of choice:
 
-https://github.com/lmc297/BTyper/raw/master/archive/btyper-2.3.0.tar.gz
+https://github.com/lmc297/BTyper/raw/master/archive/btyper-2.3.1.tar.gz
 
 3. Extract BTyper program/databases
 
 ```
-tar -xzvf btyper-2.3.0.tar.gz
+tar -xzvf btyper-2.3.1.tar.gz
 ```
 
 Note: to ensure that BTyper works correctly, make sure database directories (beginning with "seq_") remain in the same directory as the BTyper executable (stored as "btyper").
@@ -191,7 +191,7 @@ python /path/to/executable/btyper [options...]
 
 Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program or related scripts: ```python btyper [options...]```.
 
-5. Optional: in BTyper version 2.3.0 (released 18-09-18), ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
+5. Optional: in BTyper version 2.3.0 (released 18-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
 
 For published database (recommended; needs about 118M disk space):
 
@@ -468,7 +468,7 @@ Assuming you have a good quality genome assembly, ANI-based approaches should be
 
 ### Can I use BTyper to calculate ANI?
 
-As of BTyper version 2.3.0, you can! Just add -\-anib True to your command (by default, this is set to -\-anib False). You can compare your input genome(s) to:
+Starting with BTyper version 2.3.0 and up, you can! Just add -\-anib True to your command (by default, this is set to -\-anib False). You can compare your input genome(s) to:
 
 * A database consisting of genomes of 18 published *Bacillus cereus* group species (referred to as the "published" database)
 
@@ -495,7 +495,7 @@ BTyper uses BLAST to calculate ANI; hence, the name ANIb. Because different tool
 2. BLAST the fragments against each of the reference genomes (18 reference genomes if using the default published database, 39 reference genomes if using the effective database), using the following command structure:
 
 ```
-NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_vs_reference.txt, xdrop_gap_final = 150, evalue = 1e-15, max_target_seqs = 1, dust = "no", outfmt = '"6 qseqid sseqid pident length mismatch gaps qstart qend sstart send evalue bitscore qlen"')
+NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_vs_reference.txt, xdrop_gap_final = 150, evalue = 1e-15, dust = "no", outfmt = '"6 qseqid sseqid pident length mismatch gaps qstart qend sstart send evalue bitscore qlen"')
 ```
 
 3. For each hit in the BLAST outfmt 6 output file, do the following:
