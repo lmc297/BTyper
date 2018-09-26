@@ -4,7 +4,7 @@ All noteable changes to BTyper will be documented in this file
 
 ## [2.3.1] 2018-09-26
 ### Changed
-- Removed "max_target_seqs = 1" from ANIb blastn command; while this was initially included to mimic what many other ANIb calculators include it in their blastn commands, I am <a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/bty833/5106166">removing it from BTyper's ANIb commands.</a>
+- Removed "max_target_seqs = 1" from ANIb blastn command; while this was initially included to mimic what many other ANIb calculators include it in their blastn commands, I am <a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/bty833/5106166">removing it from BTyper's ANIb commands so that the top hit is reported.</a>
 
 ## [2.3.0] 2018-09-18
 ### Added
