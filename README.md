@@ -149,7 +149,7 @@ brew tap lmc297/homebrew-btyper
 brew install btyper
 ```
 
-7. Optional: in BTyper version 2.3.0 (released 18-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
+7. Optional: in BTyper version 2.3.0 (released 2018-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
 
 For published database (recommended; needs about 118M disk space):
 
@@ -199,7 +199,7 @@ python /path/to/executable/btyper [options...]
 
 Note: In the examples below, BTyper commands are shown as ```btyper [options...]```. If you are calling BTyper from the source file (i.e. you didn't install BTyper using Homebrew), keep in mind that you may have to call python and supply the path to btyper to execute the program or related scripts: ```python btyper [options...]```.
 
-5. Optional: in BTyper version 2.3.0 (released 18-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
+5. Optional: in BTyper version 2.3.0 (released 2018-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
 
 For published database (recommended; needs about 118M disk space):
 
