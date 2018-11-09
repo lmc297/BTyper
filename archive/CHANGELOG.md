@@ -2,6 +2,13 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.3.2] 2018-11-08
+### Added
+- *panC* allele of *B. paranthracis* to default 7-clade panC type strain database (-\-panC_db type; set to type by default), labeled as *panC* clade III; this was done to ensure that emetic ST 26 *B. cereus* group isolates continue to be classified as *panC* clade III, their legacy clade
+
+### Changed
+- Updated MLST database to reflect current PubMLST *B. cereus* database (1942 STs)
+
 ## [2.3.1] 2018-09-26
 ### Changed
 - Removed "max_target_seqs = 1" from ANIb blastn command; while this was initially included to mimic what many other ANIb calculators include it in their blastn commands, I am <a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/bty833/5106166">removing it from BTyper's ANIb commands so that the top hit is reported.</a>
