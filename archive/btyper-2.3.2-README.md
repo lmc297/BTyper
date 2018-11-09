@@ -24,9 +24,9 @@ BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be d
 
 ### Important information about *panC* clade assignment in BTyper versions 2.2.2, 2.3.0, and 2.3.1 (released 2018-05-03, 2018-09-18, and 2018-09-26, respectively)
 
-* In these versions, the default *panC* clade assigment database was the "type" database (-\-panC_db type), which used *panC* sequences of 9 type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*) to perform 7-clade panC clade assignment
+* In these versions, the default *panC* clade assigment database was the "type" database (-\-panC_db type), which used *panC* sequences of 9 type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*) to perform 7-clade *panC* clade assignment
 
-* In versions 2.2.2, 2.3.0, and 2.3.1, emetic ST 26 *B. cereus* group isolates belonging to the *B. paranthracis* species (as determined by ANIb) is assigned to *panC* clade II (*B. wiedmannii*), whereas traditional *panC* clade assignment will assign these isolates to *panC* clade III
+* In versions 2.2.2, 2.3.0, and 2.3.1, emetic ST 26 *B. cereus* group isolates belonging to the *B. paranthracis* species (as determined by ANIb) are assigned to *panC* clade II (*B. wiedmannii*), whereas traditional *panC* clade assignment will assign these isolates to *panC* clade III
 
 * In version 2.3.2 and up, BTyper will be returning to the legacy database as its default assignment option (-\-panC_db legacy) to remain consistent with classical *panC* clade assignment schemes
 
