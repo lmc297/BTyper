@@ -24,7 +24,7 @@ BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be d
 
 ### Important information about *panC* clade assignment in BTyper versions 2.2.2, 2.3.0, and 2.3.1
 
-* In these versions the default *panC* clade assigment database was the "type" database (-\-panC_db type), which used *panC* sequences of 9 type strains (B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii) to perform 7-clade panC clade assignment
+* In these versions, the default *panC* clade assigment database was the "type" database (-\-panC_db type), which used *panC* sequences of 9 type strains (B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii) to perform 7-clade panC clade assignment
 
 * In version 2.3.2 and up, BTyper will be returning to the legacy database as its default assignment option (-\-panC_db legacy) to remain consistent with classical *panC* clade assignment schemes
 
