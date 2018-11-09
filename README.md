@@ -22,7 +22,7 @@ BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be d
 
 * **btyper2matrix.py**, which can be used to aggregate multiple BTyper final results files into a single matrix/text file (see below)
 
-### Important updates (BTyper version 2.3.2; released 2018-11-18)
+### Important updates (BTyper version 2.3.2; released 2018-11-08)
 
 * To maintain consistent classification of emetic ST 26 *B. cereus* group isolates with their legacy *panC* clade (i.e., *panC* clade III), the *panC* sequence of the *B. paranthracis* type strain was added to the default 7-clade type strain *panC* database (```-panC_db type```) with *panC* clade designation III
 
