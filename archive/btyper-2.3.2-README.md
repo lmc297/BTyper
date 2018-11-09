@@ -26,7 +26,7 @@ BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be d
 
 * To maintain consistent classification of emetic ST 26 *B. cereus* group isolates with their legacy *panC* clade (i.e., *panC* clade III), the *panC* sequence of the *B. paranthracis* type strain was added to the default 7-clade type strain *panC* database (```-panC_db type```) with *panC* clade designation III
 
-* This prevents emetic ST 26 *B. cereus* group isolates from being assigned to *panC* clade II, as is done in BTyper versions 2.2.2, 2.3.0, and 2.3.1, released 2018-05-03 to 2018-11-08)
+* This prevents emetic ST 26 *B. cereus* group isolates from being assigned to *panC* clade II, as is done in BTyper versions 2.2.2, 2.3.0, and 2.3.1, released 2018-05-03 to 2018-11-08
 
 * Emetic clade III ST 26 *B. cereus* group isolates belonging to the species *B. paranthracis* will be reported as *panC* clade II in BTyper versions 2.2.2, 2.3.0, and 2.3.1, released 2018-05-03 to 2018-11-08; all other versions report *panC* clade III
 
