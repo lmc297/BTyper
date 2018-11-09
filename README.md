@@ -22,6 +22,14 @@ BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be d
 
 * **btyper2matrix.py**, which can be used to aggregate multiple BTyper final results files into a single matrix/text file (see below)
 
+### Important updates (BTyper version 2.3.2; released 2018-11-18)
+
+* To maintain consistent classification of emetic ST 26 *B. cereus* group isolates with their legacy *panC* clade (i.e., *panC* clade III), the *panC* sequence of the *B. paranthracis* type strain was added to the default 7-clade type strain *panC* database (```-panC_db type```) with *panC* clade designation III
+
+* This prevents emetic ST 26 *B. cereus* group isolates from being assigned to *panC* clade II, as is done in BTyper versions 2.2.2, 2.3.0, and 2.3.1, released 2018-05-03 to 2018-11-08
+
+* Emetic clade III ST 26 *B. cereus* group isolates belonging to the species *B. paranthracis* will be reported as *panC* clade II in BTyper versions 2.2.2, 2.3.0, and 2.3.1, released 2018-05-03 to 2018-11-08; all other versions report *panC* clade III
+
 ### Citation
 
 #### If you found the BTyper tool, its source code, and/or any of its associated databases useful, please cite:
@@ -173,12 +181,12 @@ After running either command, follow the instructions in your terminal.
   
   2. Download the BTyper's source file, and store it in your directory of choice:
 
-https://github.com/lmc297/BTyper/raw/master/archive/btyper-2.3.1.tar.gz
+https://github.com/lmc297/BTyper/raw/master/archive/btyper-2.3.2.tar.gz
 
 3. Extract BTyper program/databases
 
 ```
-tar -xzvf btyper-2.3.1.tar.gz
+tar -xzvf btyper-2.3.2.tar.gz
 ```
 
 Note: to ensure that BTyper works correctly, make sure database directories (beginning with "seq_") remain in the same directory as the BTyper executable (stored as "btyper").
@@ -293,11 +301,11 @@ Multilocus sequence typing (MLST). Performs MLST using nucleotide blast (blastn)
 *panC* clade typing. Performs *panC* clade typing using nucleotide blast (blastn) and a BTyper *panC* sequence database (see -panC_db/-\-panC_database option below). Reports highest-scoring *panC* clade using BLAST bit score. Default is set to True.
 
 **-panC_db/-\-panC_database [type, latest, or legacy]**
-*panC* gene database to use for *panC* clade typing. Optional argument for use with *panC* clade typing (-\-panC True). In version 2.2.2, BTyper uses *panC* sequences from 9 type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*) to perform 7-clade *panC* clade assignment by default. **It is highly recommended you use this method, as it shows high correlation with whole-genome phylogenetic clade (I-VII).** Default is set to type (7-clade *panC* database with 9 species type strains).
+*panC* gene database to use for *panC* clade typing. Optional argument for use with *panC* clade typing (-\-panC True). In version 2.3.2, BTyper uses *panC* sequences from 10 type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. paranthracis, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*) to perform 7-clade *panC* clade assignment by default. **It is highly recommended you use this method, as it shows high correlation with whole-genome phylogenetic clade (I-VII).** Default is set to type (7-clade *panC* database with 10 species type strains).
 
 If you want to use *panC* sequences of 18 *B. cereus* group type strains, specify -\-panC_database latest to use the most recent *panC* database, which contains *panC* sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. Instead of outputting numerical clades (clade1, clade2, ... clade7), the new database assigns clades by species name to avoid arbitrary numbering of new clades (e.g. cladeAnthracis, cladeCereus, cladeTropicus, etc.). If you are interested in the *panC* gene itself, this may be a valuable option; however, if you are interested in inferring whole-genome phylogenetic clade from *panC*, preliminary results indicate that, for some of the 9 new species, whole-genome phylogenetic clade does not correlate with whole-genome clade. This option is not recommended.
 
-In addition, the original, 7-clade typing scheme using BTyper's original *panC* allele database can be specified using -\-panC_database legacy. The legacy option is ***not*** recommended, as there are some *panC* alleles from non-type strains that, despite giving the same results as the original *panC* clade assignment tool described by <a href="https://www.tools.symprevius.org/bcereus/">Guinebretière, et al. 2010</a>, do not correlate with whole-genome clade. If you want to perform 7-clade *panC* assignment, please use the 9-species type strain (-panC_db type) method that is implemented by default in BTyper version 2.2.2 and up.
+In addition, the original, 7-clade typing scheme using BTyper's original *panC* allele database can be specified using -\-panC_database legacy. The legacy option is ***not*** recommended, as there are some *panC* alleles from non-type strains that, despite giving the same results as the original *panC* clade assignment tool described by <a href="https://www.tools.symprevius.org/bcereus/">Guinebretière, et al. 2010</a>, do not correlate with whole-genome clade. If you want to perform 7-clade *panC* assignment, please use the 10-species type strain (-panC_db type) method that is implemented by default in BTyper version 2.3.2 and up.
 
 **-s [True or False]**
 16S rDNA typing. Performs 16S rDNA typing using nucleotide blast (blastn) and 16S genes from 18 *B. cereus* group type strains. This method is NOT recommended for typing *B. cereus* group species, as 16S sequences cannot differentiate members of this group at the species level. However, it is included as an option, as some users may be interested in this locus. Reports highest-scoring 16S rDNA gene using BLAST bit score. Default is set to False.
