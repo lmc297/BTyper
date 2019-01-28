@@ -2,6 +2,10 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.3.3] 2019-01-28
+### Changed
+- Updated MLST database to reflect current PubMLST *B. cereus* database (2361 STs)
+
 ## [2.3.2] 2018-11-08
 ### Changed
 - Changed default *panC* clade assignment database back to legacy (-panC_db legacy); this was done to ensure consistency between BTyper's results and traditional definitions of *panC* clade proposed in the literature (e.g., assigning emetic ST 26 *B. cereus* to *panC* clade III) 
