@@ -16,6 +16,11 @@ Post issues at https://github.com/lmc297/BTyper/issues
 
 BTyper v. 1.0.0 output files for the 662 genomes used in the manuscript can be downloaded from https://github.com/lmc297/BTyper/raw/master/archive/sample_data/ncbi_btyper_final_results.zip.
 
+### Important information about recent versions of Biopython
+
+Biopython version 1.74 is not compatible with BTyper, due to changes in the way Biopython version 1.74 parses BLAST XML files.
+For BTyper to work correctly, make sure you are using <a href="https://biopython.org/wiki/Download">Biopython versions 1.69 - 1.73</a>.
+
 ### New to BTyper version 2.3.0 (released 2018-09-18) and up
 
 * Average nucleotide identity BLAST (ANIb) typing option; see below for details
@@ -171,11 +176,11 @@ After running either command, follow the instructions in your terminal.
   
   <a href="https://www.python.org/downloads/"> Python v. 2.7</a>
   
-  <a href="http://biopython.org/DIST/docs/install/Installation.html"> Biopython v. 1.6.9</a>
+  <a href="http://biopython.org/DIST/docs/install/Installation.html"> Biopython v. 1.69 - 1.73</a> (note that Biopython v. 1.74 is NOT compatible with BTyper)
   
-  <a href="https://github.com/Homebrew/homebrew-science/blob/master/blast.rb">BLAST+ v. 2.4.0 or higher</a>
+  <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/blast.rb">BLAST+ v. 2.4.0 or higher</a>
   
-  <a href="https://github.com/Homebrew/homebrew-science/blob/master/spades.rb">SPAdes v. 3.9.0 or higher</a>
+  <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/spades.rb">SPAdes v. 3.9.0 or higher</a>
   
   <a href="https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation">SRA toolkit v. 2.8.0 or higher</a>
   
