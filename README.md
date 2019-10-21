@@ -125,10 +125,10 @@ btyper2matrix.py -i </path/to/directory/btyper_final_results/> -o </path/to/desi
 sudo easy_install pip
 ```
 
-3. Install Biopython, if necessary, by running the following command from your terminal:
+3. Install Biopython v. 1.73, if necessary, by running the following command from your terminal (note that Biopython v. 1.74 is not compatible with BTyper):
 
 ```
-pip install biopython
+pip install biopython==1.73
 ```
 Note: if you don't have permissions, you may need to use sudo:
 
