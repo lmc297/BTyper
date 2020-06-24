@@ -337,7 +337,7 @@ Note: We recommend selecting optimum k-mer size(s) for your specific data set by
 **-a/-\-amr [True or False]**
 Antimicrobial resistance gene detection. Detects antimicrobial resistance genes, and reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True. Note: in BTyper version 2.2.0, the -\-amr option can be used to detect plasmid replicons in nucleotide sequences using the PlasmidFinder database; see below for more information.
 
-**-amr_db/-\-amr_database [argannot or megares]**
+**-amr_db/-\-amr_database [argannot or plasmidfinder]**
 Antimicrobial resistance (AMR) gene database to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database argannot to use the ARG-ANNOT AMR gene nucleotide database or -\-amr_database plasmidfinder to use the PlasmidFinder plasmid replicon database; all options that can be used with AMR gene detection (e.g. minimum percent identity and coverage thresholds, pruning method, overlap) described below can be applied to plasmid replicon detection.
 
 **-\-amr_p  [integer between 0 and 100]**
@@ -886,8 +886,6 @@ Fu, L., et al. CD-HIT: accelerated for clustering the next-generation sequencing
 Gupta, SK, et al. ARG-ANNOT, a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes. *Antimicrobial Agents and Chemotherapy* 2014;58(1):212-20.
 
 Inouye, M., Harriet Dashnow, Lesley-Ann Raven, Mark B Schultz, Bernard J Pope, Takehiro Tomita, Justin Zobel and Kathryn E Holt. SRST2: Rapid genomic surveillance for public health and hospital microbiology labs. *Genome Medicine* 2014 Nov 20;6(11):90.
-
-Lakin, S.M., et al. MEGARes: an antimicrobial resistance database for high throughput sequencing. *Nucleic Acids Research* 2017 Jan 4; 45(Database issue): D574–D580.
 
 #### Plasmid Replicon Detection
 
