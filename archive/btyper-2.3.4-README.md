@@ -4,7 +4,7 @@ A computational tool for virulence-based classification of *Bacillus cereus* gro
 
 ## Overview
 
-BTyper is a command-line tool that employs a combination of *in silico* (i) virulence gene detection, (ii) multi-locus sequence typing (MLST), (iii) *panC* clade assignment, and (iv) *rpoB* allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data.
+BTyper is a command-line tool that employs a combination of *in silico* (i) virulence gene detection, (ii) multi-locus sequence typing (MLST), (iii) *panC* clade assignment, and (iv) *rpoB* allelic typing to rapidly classify *B. cereus* group isolates using nucleotide sequencing data. For taxonomic classification of *B. cereus* group genomes using our <a href="https://mbio.asm.org/content/11/1/e00034-20">recently proposed taxonomic framework for the *B. cereus* group</a>, see <a href="https://github.com/lmc297/BTyper3">BTyper3</a>.
 
 Antimicrobial resistance (AMR) gene detection was added in BTyper version 2.0.0 (released 2017-06-29), a function that can be used with sequencing data from any bacterial species.
 
@@ -186,12 +186,12 @@ After running either command, follow the instructions in your terminal.
   
   2. Download the BTyper's source file, and store it in your directory of choice:
 
-https://github.com/lmc297/BTyper/raw/master/archive/btyper-2.3.3.tar.gz
+https://github.com/lmc297/BTyper/raw/master/archive/btyper-2.3.4.tar.gz
 
 3. Extract BTyper program/databases
 
 ```
-tar -xzvf btyper-2.3.3.tar.gz
+tar -xzvf btyper-2.3.4.tar.gz
 ```
 
 Note: to ensure that BTyper works correctly, make sure database directories (beginning with "seq_") remain in the same directory as the BTyper executable (stored as "btyper").
@@ -293,7 +293,7 @@ Average nucleotide identity blast (ANIb). Performs ANIb using the algorithm desc
 Note: ANIb is a good method for predicting bacterial species. However, running ANIb (-\-anib True) will significantly increase your analysis time. For example: a single *B. cereus* group draft genome (-\-draft_genome) takes under 10 seconds to analyze using BTyper's default settings; using -\-anib True (with the default published genome database), it takes about 1 minute.
 
 **-b_db/-\-anib_db [published or effective]**
-Reference genome database to use for ANIb. Optional argument for use with ANIb (-\-anib True). Specify reference genomes for ANIb calculation: published for 18 published *Bacillus cereus* group species, or effective to use the published database plus 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (39 species total). Default is set to published.
+Reference genome database to use for ANIb. Optional argument for use with ANIb (-\-anib True). Specify reference genomes for ANIb calculation: published for 19 published *Bacillus cereus* group species, or effective to use the published database plus 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (40 species total). Default is set to published.
 Note: Running ANIb with the effective species genome database (-\-anib_db effective) will significantly increase your analysis time. For example: a single *B. cereus* group draft genome (-\-draft_genome) takes about 1 minute to run using the published (default) genome database; using -\-anib_db effective, it takes about 2 minutes.
 
 **-m/-\-mlst [True or False]**
@@ -312,13 +312,13 @@ Multilocus sequence typing (MLST). Performs MLST using nucleotide blast (blastn)
 
 Note that in version 2.2.2, 2.3.0, and 2.3.1, BTyper uses *panC* sequences from 9 type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*) to perform 7-clade *panC* clade assignment by default (-\-panC_db type). In version 2.3.2 and up (as well as all BTyper versions prior to 2.2.2), the legacy database will be used to maintain compatibility with traditional definitions of *panC* clade proposed in the literature.
 
-If you want to use *panC* sequences of 18 *B. cereus* group type strains, specify -\-panC_database latest to use the most recent *panC* database, which contains *panC* sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. Instead of outputting numerical clades (clade1, clade2, ... clade7), the new database assigns clades by species name to avoid arbitrary numbering of new clades (e.g. cladeAnthracis, cladeCereus, cladeTropicus, etc.). If you are interested in the *panC* gene itself, this may be a valuable option.
+If you want to use *panC* sequences of 19 *B. cereus* group type strains, specify -\-panC_database latest to use the most recent *panC* database, which contains *panC* sequences from type strains for 19 *B. cereus* group species. This new database includes the 9 original species type strains (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 10 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>, plus <a href="https://www.microbiologyresearch.org/content/journal/ijsem/10.1099/ijsem.0.003673">*B. fungorum*</a>. Instead of outputting numerical clades (clade1, clade2, ... clade7), the new database assigns clades by species name to avoid arbitrary numbering of new clades (e.g. cladeAnthracis, cladeCereus, cladeTropicus, etc.). If you are interested in the *panC* gene itself, this may be a valuable option.
 
 **-s [True or False]**
-16S rDNA typing. Performs 16S rDNA typing using nucleotide blast (blastn) and 16S genes from 18 *B. cereus* group type strains. This method is NOT recommended for typing *B. cereus* group species, as 16S sequences cannot differentiate members of this group at the species level. However, it is included as an option, as some users may be interested in this locus. Reports highest-scoring 16S rDNA gene using BLAST bit score. Default is set to False.
+16S rDNA typing. Performs 16S rDNA typing using nucleotide blast (blastn) and 16S genes from 19 *B. cereus* group type strains. This method is NOT recommended for typing *B. cereus* group species, as 16S sequences cannot differentiate members of this group at the species level. However, it is included as an option, as some users may be interested in this locus. Reports highest-scoring 16S rDNA gene using BLAST bit score. Default is set to False.
 
 **-s_db/-\-s_database [latest or legacy]**
-16S rDNA gene database to use for 16S rDNA typing. Optional argument for use with 16S rDNA typing (-s True). Specify -\-s_database latest to use the most recent 16S rDNA database, which contains 16S rDNA sequences from type strains for 18 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>. The original, 9-species database can be specified using -\-s_database legacy. However, as always, **interpret any 16S rDNA typing results for the *B. cereus* group with extreme caution!** Default is set to latest (18-species 16S rDNA database). 
+16S rDNA gene database to use for 16S rDNA typing. Optional argument for use with 16S rDNA typing (-s True). Specify -\-s_database latest to use the most recent 16S rDNA database, which contains 16S rDNA sequences from type strains for 19 *B. cereus* group species. This new database includes the 9 original species (*B. anthracis, B. cereus sensu stricto, B. cytotoxicus, B. mycoides, B. pseudomycoides, B. thuringiensis, B. toyonensis, B. weihenstephanensis, B. wiedmannii*), as well as the 9 new species proposed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/28792367"> Liu, et al., 2017</a>, plus <a href="https://www.microbiologyresearch.org/content/journal/ijsem/10.1099/ijsem.0.003673">*B. fungorum*</a>. The original, 9-species database can be specified using -\-s_database legacy. However, as always, **interpret any 16S rDNA typing results for the *B. cereus* group with extreme caution!** Default is set to latest (19-species 16S rDNA database). 
 
 **-e/-\-evalue [float greater than or equal to 0]**
 Maximum blast e-value. Optional argument for use with any typing scheme(s). Specify the maximum e-value needed for a BTyper run. Default is set to 1e-5.
@@ -338,7 +338,7 @@ Note: We recommend selecting optimum k-mer size(s) for your specific data set by
 Antimicrobial resistance gene detection. Detects antimicrobial resistance genes, and reports genes present at greater than specified percent identity/coverage thresholds. Default is set to True. Note: in BTyper version 2.2.0, the -\-amr option can be used to detect plasmid replicons in nucleotide sequences using the PlasmidFinder database; see below for more information.
 
 **-amr_db/-\-amr_database [argannot or megares]**
-Antimicrobial resistance (AMR) gene database to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database argannot to use the ARG-ANNOT AMR gene nucleotide database or -\-amr_database megares to use the MEGARes AMR gene nucleotide database. Default is set to argannot (ARG-ANNOT database). Note: in BTyper version 2.2.0, plasmid replicon detection can be performed using the PlasmidFinder database by specifying -\-amr_database plasmidfinder; all options that can be used with AMR gene detection (e.g. minimum percent identity and coverage thresholds, pruning method, overlap) described below can be applied to plasmid replicon detection.
+Antimicrobial resistance (AMR) gene database to use for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify -\-amr_database argannot to use the ARG-ANNOT AMR gene nucleotide database or -\-amr_database plasmidfinder to use the PlasmidFinder plasmid replicon database; all options that can be used with AMR gene detection (e.g. minimum percent identity and coverage thresholds, pruning method, overlap) described below can be applied to plasmid replicon detection.
 
 **-\-amr_p  [integer between 0 and 100]**
 Minimum percent nucleotide identity for antimicrobial resistance gene detection. Optional argument for use with antimicrobial resistance gene detection (-\-amr True). Specify the minimum percent nucleotide identity needed for an antimicrobial resistance gene to be considered present in a sequence. Default is set to 75.
@@ -379,10 +379,10 @@ A tab-separated list of virulence genes detected in the genome with the respecti
 A tab-separated list of antimicrobial resistance genes detected in the genome with the respective e-value, percent identity, and percent coverage for each gene. The highest-scoring allele (using its blast bitscore) from its respective gene cluster/location (depending on pruning method) is reported. Additionally, if a gene is detected multiple times in a genome, BTyper reports only the highest-scoring hit based on its BLAST bit score when -\-prune cluster is used. When -\-prune location is used, alleles of the same gene that appear in different locations in the genome (i.e. multiple copies) will be reported here. Note: in BTyper version 2.2.0, if the PlasmidFinder database is being used to detect plasmid replicons, they will be reported here in lieu of AMR genes.
 
 * **If average nucleotide identity BLAST (ANIb) is being performed (-\-anib True):**
-A tab-separated line, containing the *B. cereus* group species with the highest ANIb value (one of the 18 published *B. cereus* group species if the default published ANIb database is used; if the effective ANIb database is used, the closest "species" may be denoted by a RefSeq accession number rather than a species name), the ANIb value, and the percent coverage. If no tested *B. cereus* group species has an ANIb value > 95 (often regarded as a cutoff for bacterial species), a species of "Unknown" is reported, with the highest-ANIb-producing species in parentheses plus \* (e.g., "Unknown (Bacillus pseudomycoides)\*")
+A tab-separated line, containing the *B. cereus* group species with the highest ANIb value (one of the 19 published *B. cereus* group species if the default published ANIb database is used; if the effective ANIb database is used, the closest "species" may be denoted by a RefSeq accession number rather than a species name), the ANIb value, and the percent coverage. If no tested *B. cereus* group species has an ANIb value > 95 (often regarded as a cutoff for bacterial species), a species of "Unknown" is reported, with the highest-ANIb-producing species in parentheses plus \* (e.g., "Unknown (Bacillus pseudomycoides)\*")
 
 * **If *panC* clade typing is being performed (-\-panC True):**
-A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7 if the type strain 7-clade typing scheme is used, or cladeAlbus, cladeAnthracis, clade Cereus, ... cladeWiedmannii if the latest 18-species typing scheme is used), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
+A tab-separated line, containing the closest-matching *panC* clade (clade1, clade2, ... clade7 if the type strain 7-clade typing scheme is used, or cladeAlbus, cladeAnthracis, clade Cereus, ... cladeWiedmannii if the latest 19-species typing scheme is used), the closest-matching *B. cereus* group genome, percent identity, and percent coverage. A *panC* gene that does not match any gene in the database at &#8805; 75\% identity gives a clade designation of "None" (your isolate may not be a member of the *B. cereus* group), while a *panC* gene that is present at &#8805; 75\% identity but &#8804; 90\% identity gives a clade designation of "?" (a *panC* clade could not be determined for your isolate).
 
 * **If MLST is being performed (-\-mlst True):**
 A tab-separated line, containing the isolate's (i) sequence type (ST), (ii) *glp* allelic type (AT), (iii) *gmk* AT, (iv) *ilv* AT, (v) *pta* AT, (vi) *pur* AT, (vii) *pyc* AT, and (viii) *tpi* AT. The best-matching allele is reported at each locus; an allele that does not match with 100\% identity or coverage is denoted by an asterisk (\*), while an allele that is not detected in the genome at the given e-value threshold is denoted by "?". If a sequence type cannot be determined using the 7 best-matching allelic types, a "?" is listed in its place. A ST that is detemined using any best-matching alleles that did not match with 100\% identity or coverage is denoted by \*, regardless of whether all 7 alleles could be associated with a ST or not.
@@ -399,7 +399,7 @@ Currently, "Genus" refers to the genus of the best-matching organism using NCBI'
 and "species" refers to the species of the best-matching organism using NCBI's BLAST server (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 
 * **If 16S rDNA typing is being performed (-\-s True):**
-A tab-separated line containing strain information of the best-matching of 18 *B. cereus* group type strains (9 if using the legacy 16S rDNA database), percent identity, and percent coverage. Interpret this information at your own risk, as 16S rDNA sequencing is NOT recommended for typing *B. cereus* group isolates.
+A tab-separated line containing strain information of the best-matching of 19 *B. cereus* group type strains (9 if using the legacy 16S rDNA database), percent identity, and percent coverage. Interpret this information at your own risk, as 16S rDNA sequencing is NOT recommended for typing *B. cereus* group isolates.
 
 **genefiles**
 *directory*
@@ -451,9 +451,9 @@ For help, type ```btyper2matrix.py -h``` or ```btyper2matrix.py --help```
 
 * **Purpose:** download database(s) to be used with BTyper's ANIb option (-\-anib True); must be run before running ANIb
 
-* **Input:** published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 118M database with 18 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 21 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (39 species total; for most users' purposes, the published database is recommended)
+* **Input:** published or effective; specify the ANIb database to download for use with BTyper's -b/-\-anib option; published for 124M database with 19 published *Bacillus cereus* group species, or effective for 237M database, which includes published database plus 21 effective *Bacillus cereus* group species that have been proposed in the literature but not published as a novel species (40 species total; for most users' purposes, the published database is recommended)
 
-* **Output:** 18 genomes stored in BTyper's seq_anib_db/published/ directory (published) or 18 genomes stored in BTyper's seq_anib_db/published/ directory, plus 21 genomes stored in BTyper's seq_anib_db/effective/ directory (effective)
+* **Output:** 19 genomes stored in BTyper's seq_anib_db/published/ directory (published) or 19 genomes stored in BTyper's seq_anib_db/published/ directory, plus 21 genomes stored in BTyper's seq_anib_db/effective/ directory (effective)
 
 * **Command structure:**
 ```
