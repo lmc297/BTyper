@@ -2,6 +2,15 @@
 
 All noteable changes to BTyper will be documented in this file
 
+## [2.3.4] 2020-06-24
+### Changed
+- Remove "N" and "n" characters in genomes/pseudo-genomes prior to fragmentation for ANIb
+- Added *B. fungorum*, a <a href="https://www.microbiologyresearch.org/content/journal/ijsem/10.1099/ijsem.0.003673">novel proposed species published in 2020</a>, to published ANIb database and 16S rDNA sequence database
+- Updated MLST database to reflect current PubMLST *B. cereus* database (2567 STs)
+
+### Removed
+- Removed MEGARes database for AMR gene detection; only ARG-ANNOT will be supported
+
 ## [2.3.3] 2019-01-28
 ### Changed
 - Updated MLST database to reflect current PubMLST *B. cereus* database (2361 STs)
