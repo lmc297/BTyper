@@ -485,13 +485,13 @@ Assuming you have a good quality genome assembly, ANI-based approaches should be
 
 Starting with BTyper version 2.3.0 and up, you can! Just add -\-anib True to your command (by default, this is set to -\-anib False). You can compare your input genome(s) to:
 
-* A database consisting of genomes of 18 published *Bacillus cereus* group species (referred to as the "published" database)
+* A database consisting of genomes of 19 published *Bacillus cereus* group species (referred to as the "published" database)
 
-* The published database plus a database consisting of 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (referred to as the "effective" database; 39 species total).
+* The published database plus a database consisting of 21 effective *Bacillus* cereus group species that have been proposed in the literature but not published as a novel species (referred to as the "effective" database; 40 species total).
 
 ### Which ANIb genome database should I use?
 
-**In nearly all cases, users should use the published genome database (used by default).** This database contains the genomes of all 18 published *B. cereus* group species and is the most accurate representation of our current knowledge of the *B. cereus* group, making it much easier to interpret the results. Furthermore, the published database takes up about half the space of the effective genome database (about 118M, compared to 237M for the effective database) and is much more stable (i.e., it takes a long time to publish a new *B. cereus* group species, so genome additions/removals to/from this database are rare).
+**In nearly all cases, users should use the published genome database (used by default).** This database contains the genomes of all 19 published *B. cereus* group species and is the most accurate representation of our current knowledge of the *B. cereus* group, making it much easier to interpret the results. Furthermore, the published database takes up about half the space of the effective genome database (about 124M, compared to 237M for the effective database) and is much more stable (i.e., it takes a long time to publish a new *B. cereus* group species, so genome additions/removals to/from this database are rare).
 
 A situation in which a user might select the effective species database over the published one is if she/he/they had a genome that was thought to belong to a novel species, and she/he/they wanted to compare the genome to putative novel species proposed in the literature to see if the species has been proposed before.
 
@@ -503,11 +503,11 @@ The goal of BTyper is to serve as a **rapid, high-throughput** tool for characte
 
 BTyper uses BLAST to calculate ANI; hence, the name ANIb. Because different tools calculate ANI differently (and because we love transparency), the ANIb algorithm implemented in BTyper can be outlined as follows:
 
-0. If -\-draft_genome option is used, concatenate contigs/scaffolds into a single pseudochromosome with a spacer sequence of "NNnnNNnnNNnnNNnn" inserted in between each contig/scaffold (this is done so that the ANIb method is compatible with the other typing methods implemented in BTyper).
+0. If -\-draft_genome option is used, concatenate contigs/scaffolds into a single pseudochromosome with a spacer sequence of "NNnnNNnnNNnnNNnn" inserted in between each contig/scaffold (this is done so that the ANIb method is compatible with the other typing methods implemented in BTyper). In BTyper v. 2.3.4 and up, this is removed prior to the next step (i.e., fragmentation).
 
 1. Fragment the input genome into 1020 bp fragments (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/17220447">Goris, et al. 2007</a>).
 
-2. BLAST the fragments against each of the reference genomes (18 reference genomes if using the default published database, 39 reference genomes if using the effective database), using the following command structure:
+2. BLAST the fragments against each of the reference genomes (19 reference genomes if using the default published database, 40 reference genomes if using the effective database), using the following command structure:
 
 ```
 NcbiblastnCommandline(query = fragments, db = reference_genome, out = fragments_vs_reference.txt, xdrop_gap_final = 150, evalue = 1e-15, dust = "no", outfmt = '"6 qseqid sseqid pident length mismatch gaps qstart qend sstart send evalue bitscore qlen"')
