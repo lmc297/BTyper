@@ -156,7 +156,7 @@ brew install btyper
 
 7. Optional: in BTyper version 2.3.0 (released 2018-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
 
-For published database (recommended; needs about 118M disk space):
+For published database (recommended; needs about 124M disk space):
 
 ```
 build_btyper_anib_db.py -db published
@@ -206,7 +206,7 @@ Note: In the examples below, BTyper commands are shown as ```btyper [options...]
 
 5. Optional: in BTyper version 2.3.0 (released 2018-09-18) and up, ANIb has been added as an optional typing method (see below for details). If you want to use BTyper for ANIb, download the "published" or "effective" *B. cereus* group species ANIb database(s) by running one of the following commands from your terminal:
 
-For published database (recommended; needs about 118M disk space):
+For published database (recommended; needs about 124M disk space):
 
 ```
 python /path/to/executable/build_btyper_anib_db.py -db published
@@ -497,7 +497,7 @@ A situation in which a user might select the effective species database over the
 
 ### If ANI is so great for determining bacterial species, why doesn't BTyper use it by default?
 
-The goal of BTyper is to serve as a **rapid, high-throughput** tool for characterizing *Bacillus cereus* group species *in silico*, and running ANIb on a single draft *B. cereus* group genome using all other default settings increases the analysis time from about 9 seconds to about 1 minute (using the default published ANIb database; using the effective ANIb database, this increases the analysis time to about 2 minutes). For users that don't mind waiting a minute for their results, we recommend using ANIb, as it really is the best way to assign a *B. cereus* group genome to a *B. cereus* group species. However, for some users, this increase may not be trivial. Furthermore, the published and effective ANIb databases take up about 118M and 237M of disk space, respectively, and some users may not have that much to spare. As a result, we have elected to not include it as a default analysis method at this time.
+The goal of BTyper is to serve as a **rapid, high-throughput** tool for characterizing *Bacillus cereus* group species *in silico*, and running ANIb on a single draft *B. cereus* group genome using all other default settings increases the analysis time from about 9 seconds to about 1 minute (using the default published ANIb database; using the effective ANIb database, this increases the analysis time to about 2 minutes). For users that don't mind waiting a minute for their results, we recommend using ANIb, as it really is the best way to assign a *B. cereus* group genome to a *B. cereus* group species. However, for some users, this increase may not be trivial. Furthermore, the published and effective ANIb databases take up about 124M and 237M of disk space, respectively, and some users may not have that much to spare. As a result, we have elected to not include it as a default analysis method at this time.
 
 ### How does BTyper calculate ANI?
 
