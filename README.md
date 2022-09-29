@@ -1,3 +1,5 @@
+# Important: BTyper is no longer being actively maintained, as it has been replaced by <a href="https://github.com/lmc297/BTyper3">BTyper3</a>, its <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2020.580691/full">new and improved</a> successor. Please consider switching to BTyper3!
+
 # BTyper
 
 A computational tool for virulence-based classification of *Bacillus cereus* group isolates and/or antimicrobial resistance gene detection using nucleotide sequencing data
